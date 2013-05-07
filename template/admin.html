@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Dodo ACP</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<script src="/jquery.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		$("div#newdocbox").hide();
+		$("div#donebox").hide();
+		$("div#waitbox").hide();
+		$("a#canceldoc").click(function() {
+			$("div#newdocbox").fadeOut("slow");
+		});
+		$("a#newdoc").click(function() {
+		$("span#newurl").html(location.origin + "/");
+			$("div#newdocbox").fadeIn("slow");
+		});
+		$("a#dodoc").click(function() {
+			$("div#formbox").fadeOut("fast", function() {
+				$("div#waitbox").fadeIn("fast");
+				$.post("/acp", { action: "adduser", mail: $("input#gmail").val(), nick: $("input#nickname").val() })
+				.done(function(data) {
+					$("div#waitbox").fadeOut("fast", function() { $("div#donebox").fadeIn("fast").delay(200).fadeOut("fast",function() {$("div#formbox").fadeIn("fast");}); });
+				})
+				.error(function(data){
+					$("div#waitbox").fadeOut("fast", function() {$("div#formbox").fadeIn("fast");});
+					alert("Check your console (and logs, if you can)!");
+					console.log(data);
+				});
+			});
+		});
+  	});
+  	</script>
+	{% if not denied %}<script>user = "{{ name }}";</script>{% endif %}
+</head>
+<body>
+	{% if denied %}
+		<table style="border: 0; width: 100%; height: 100%;"><tr><td style="vertical-align: middle;">
+		<container style="width: 400px; text-align: center; font-size: .9em;">
+		<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i> <span style="color:#f30;">A<span style="font-weight:400">CP</span></span></h1></header><br />
+		{% if islogged %}
+		Sorry <b>{{ name }}</b>, but this page isn't really meant for you to visit, please don't be mad at me :(<br /><br />
+		<a href="/" class="button">Go home</a>
+		{% else %}
+		Please <b>login</b> to use <b><i>Dodo</i></b> <span style="color:#f30;">ACP</span><br /><br />
+		<a href="{{ url }}" class="button">Login</a>
+		{% endif %}
+		</container>
+		</tr></td></table>
+	{% else %}
+		<container>
+		<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i> <span style="color:#f30;">A<span style="font-weight:400">CP</span></span></h1></header><br />
+		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
+		<div id="buttons" style="text-align: center;">
+			<a class="button" id="newdoc">Create new user</a>
+			<a class="button" id="list" href="list">List all users</a>
+			<a class="button" id="logout" href="{{ url }}">Logout</a>
+		</div>
+		<div id="newdocbox" style="text-align: center;"><hr />
+			<div id="formbox">
+			<header><h3>Google account email</h3></header>
+			<input class="newbox" type="text" id="gmail" style="width: 280px; margin: 10px 0;" /><br />
+			<h4>Username</h4><br />
+			<span id="newurl"></span><input id="nickname" class="newbox" type="text" style="text-align: left; padding-left: 5px;width: 100px; margin: 10px 5px;"/><br />
+			<a class="button" id="dodoc">Create User</a>
+			<a class="button" id="canceldoc">Nevermind</a>
+			</div>
+			<div id="waitbox"><h1>Adding...</h1></div>
+			<div id="donebox"><h1>Done!</h1></div>
+		<hr /></div>
+		</center><br /></container>
+	{% endif %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<script src="/jquery.min.js"></script>
+	<script src="/showdown.js"></script>
+	<script>
+	$(document).ready(function (){
+	    $("#gohome").attr("href",location.origin);
+		var converter, html;
+	    converter = new Showdown.converter();
+	    html = converter.makeHtml($("content").html());
+	    $("content").html(html);
+	    $("#pin").click(function(){
+	    	$.post(document.URL+"/pin", function(data){
+	    		if (data === "pinned")
+	    		{
+	    			$("#pin").html("[pinned!]").css("color","#a22");
+	    			setTimeout(function(){$("#pin").html("[unpin]").css("color","#da2");},1000);
+	    		} else {
+	    			$("#pin").html("[unpinned!]").css("color","#a22");
+	    			setTimeout(function(){$("#pin").html("[pin]").css("color","#da2");},1000);
+	    		}
+	    	});
+	    });
+	});
+    </script>
+
+	{% if iserror %}
+	<style>html, body { width: 100%; height: 100%; overflow: hidden; }</style>
+	{% endif %}
+</head>
+<body>
+	{% if iserror %}
+	<table style="border: 0; width: 100%; height: 100%;"><tr><td style="vertical-align: middle;">
+	<container style="width: 550px; text-align: center; font-size: .9em; padding-top:30px; ">
+	{% else %}
+	<container style="padding: 20px 30px 30px 30px;">
+	{% endif %}
+	{% if iscreator and not iserror %}
+	<div id="homespot"><a id="gohome">[home]</a>&nbsp;<a class="pin" id="pin">{% if ispinned %}[unpin]{% else %}[pin]{% endif %}</a></div>
+	<div id="editspot"><a href="{{ pageurl }}/edit">[edit]</a>&nbsp;<a href="{{ pageurl }}/delete" class="delete">[delete]</a></div>{% endif %}
+	<header><h1 style="font-weight: 300;">{{ title }}</h1></header><br />
+	<content>{{ content }}</content>
+	<br /></container>
+	{% if iserror %}</td></tr></table>{% endif %}
+</body>
+</html>

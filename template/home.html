@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Dodo</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<script src="/jquery.min.js"></script>
+	<script src="/home.js"></script>
+	{% if not denied %}<script>user = "{{ name }}";</script>{% else %}
+	<style>html, body { width: 100%; height: 100%; overflow: hidden; }</style>{% endif %}
+</head>
+<body>
+	{% if denied %}
+		<table style="border: 0; width: 100%; height: 100%;"><tr><td style="vertical-align: middle;">
+		<container style="width: 400px; text-align: center; font-size: .9em;">
+		<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1></header><br />
+		{% if islogged %}
+		Sorry <b>{{ name }}</b>, but you haven't been granted access to the <b><i>Dodo</i></b>.<br />
+		If you logged into the wrong account, please <b>logout</b> using the following button and login again with the right account.<br /><br />
+		<a href="{{ url }}" class="button">Logout</a>
+		{% else %}
+		Please <b>login</b> to use <b><i>Dodo</i></b><br /><br />
+		<a href="{{ url }}" class="button">Login</a>
+		{% endif %}
+		</container>
+		</tr></td></table>
+	{% else %}
+		<container>
+		<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1></header><br />
+		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
+		<div id="buttons" style="text-align: center;">
+			<a class="button" id="newdoc">New doc</a>
+			<a class="button" id="list" href="list">List all docs</a>
+			<a class="button" id="logout" href="{{ url }}">Logout</a>
+		</div>
+		<div id="newdocbox" style="text-align: center;"><hr />
+			<header><h3>Document name</h3></header>
+			<input class="newbox" type="text" style="width: 280px; margin: 10px 0;" id="sname" value="Untitled" /><br />
+			<h4>Document URL</h4><br />
+			<span id="newurl"></span><input class="newbox" type="text" id="surl" style="text-align: left; padding-left: 5px;width: 100px; margin: 10px 5px;" value="untitled"/><br />
+			<a class="button" id="dodoc">Create page</a>
+			<a class="button" id="canceldoc">Nevermind</a>
+		<hr /></div>
+		<br />
+		<center><div class="box" style="width: 270px;"><header><h3>Last created</h3></header><br />
+			{% for doc in lastc %}
+			<a class="{% if doc.isfav %}fav {% else %}normal {% endif %}item" href="{{ doc.url }}">{{ doc.name }}<id>{{ doc.surl }}</id>{% if doc.isfav %}<favspot>!</favspot>{% endif %}</a>
+			{% endfor %}
+		</div>
+
+		<div class="box" style="width: 270px;"><header><h3>Last modified</h3></header><br />
+			{% for doc in lastm %}
+			<a class="{% if doc.isfav %}fav {% else %}normal {% endif %}item" href="{{ doc.url }}">{{ doc.name }}<id>{{ doc.surl }}</id>{% if doc.isfav %}<favspot>!</favspot>{% endif %}</a>
+			{% endfor %}
+		</div>
+		<div class="box" style="width: 270px;"><header><h3>Pinned docs</h3></header><br />
+			{% for doc in lastfav %}
+			<a class="{% if doc.isfav %}fav {% else %}normal {% endif %}item" href="{{ doc.url }}">{{ doc.name }}<id>{{ doc.surl }}</id>{% if doc.isfav %}<favspot>!</favspot>{% endif %}</a>
+			{% endfor %}
+		</div>
+		</center><br /></container>
+	{% endif %}
+</body>
+</html>

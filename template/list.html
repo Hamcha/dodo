@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Dodo</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<script src="/jquery.min.js"></script>
+	<script>user = "{{ name }}";</script>
+</head>
+<body>
+	<container>
+	<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1></header><br />
+	<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
+	<div id="buttons" style="text-align: center;">
+		<a class="button" href="/">Homepage</a>
+		<a class="button" id="logout" href="{{ url }}">Logout</a>
+	</div>
+	<center><div class="box"><header><h3>{{ title }}</h3></header><br />
+		{% for doc in dlist %}
+		<a class="{% if doc.isfav %}fav {% else %}normal {% endif %}item" href="{{ doc.url }}">{{ doc.name }}<id>{{ doc.surl }}</id>{% if doc.isfav %}<favspot>!</favspot>{% endif %}</a>
+		{% endfor %}
+	</div>
+	</div>
+	</center><br /></container>
+</body>
+</html>

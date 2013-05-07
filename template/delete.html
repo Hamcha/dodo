@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete?</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<style>html, body { width: 100%; height: 100%; overflow: hidden; }</style>
+	<script src="/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#goback").click(redirect);
+		$("#dodelete").click(function(){
+			$.post(document.URL).done(redirect).error(throwerror);
+		});
+	});
+
+	function redirect() { location.href = location.origin + "/{{ user }}/{{ name }}.{{ page }}"; }
+	function throwerror() { alert("Check your console (and logs, if you can)!"); console.log(data); }
+	</script>
+</head>
+<body>
+		<table style="border: 0; width: 100%; height: 100%;"><tr><td style="vertical-align: middle;">
+		<container style="width: 400px; text-align: center; font-size: .9em;">
+		<header><h1>Are you sure?</h1></header><br />
+		{% if issinglepage %}
+		Do you really want to delete this page (<b>{{ name }}.{{ page }}</b>)?<br />
+		<h2>{{ pname }}</h2><br />
+		{% else %}
+		Do you really want to delete this document (<b>{{ name }}</b>)?<br />
+		<h2>{{ pname }}</h2><br />
+		{% endif %}
+		<a class="button" id="dodelete">Yes, please</a><a class="button" id="goback">Oops, wrong click</a>
+		</container>
+		</tr></td></table>
+</body>
+</html>
