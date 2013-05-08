@@ -297,13 +297,13 @@ class Homepage(webapp2.RequestHandler):
 				favl.ancestor(dq)
 				favl.filter("isfav =", True)
 				favn = 0
-				for p in favl.run(limit=6):
+				for p in favl.run(limit=7):
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
 					p.name = page.name
 					data["lastfav"].append(p)
 					favn += 1
-				if favn == 6:
+				if favn == 7:
 					p = { "name": "See all pinned", "url":"list/pinned" }
 					data["lastfav"].append(p)
 		else:
