@@ -2,6 +2,18 @@ from google.appengine.ext import db
 from google.appengine.api import memcache
 import model
 
+def getUserDataByHandler(handler):
+	data = memcache.get('userh:%s' % handler)
+	if data:
+		return data
+	else:
+		query = db.Query(model.User)
+		query.filter('handler =', handler)
+		res = query.get()
+		if res != None:
+			memcache.set('userh:%s' % handler, res)
+		return res
+
 def getUserData(name):
 	data = memcache.get('user:%s' % name)
 	if data:
@@ -24,7 +36,6 @@ def getDocument(user, durl):
 
 def getPage(doc, purl):
 	data = memcache.get('page:%s:%s' % (doc.surl, purl))
-	print purl
 	if data:
 		return data
 	else:

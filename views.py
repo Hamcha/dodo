@@ -1,9 +1,8 @@
-import os, datetime
+import os
 import webapp2
 from google.appengine.ext.webapp import template
 from google.appengine.ext import db
 from google.appengine.api import users
-from google.appengine._internal.django.utils.safestring import mark_safe
 
 import model
 import database
@@ -11,6 +10,7 @@ import database
 class ViewDocument(webapp2.RequestHandler):
 
 	def get(self, user, durl, page):
+		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		dq = database.getUserData(user)
 
@@ -66,6 +66,7 @@ class ViewDocument(webapp2.RequestHandler):
 
 class EditDocument(webapp2.RequestHandler):
 	def get(self, user, durl, page):
+		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		dq = database.getUserData(user)
 
@@ -112,7 +113,7 @@ class EditDocument(webapp2.RequestHandler):
 		self.response.out.write (template.render (path, data))
 
 	def post(self, user, durl, page):
-		
+		import datetime
 		dq = database.getUserData(user)
 
 		if page is None or not page.strip():
@@ -264,40 +265,40 @@ class Homepage(webapp2.RequestHandler):
 			data["islogged"] = True
 			data["name"] = user.nickname()
 			data["url"] = users.create_logout_url("/")
-			query = db.Query(model.User)
-			query.filter('handler =', user.nickname())
-			# Check if user is allowed and get its data
-			dq = query.get()
+			dq = database.getUserDataByHandler(user.nickname())
 			if dq:
 				data["denied"] = False
 				data["name"] = dq.name
 				# Last created docs
 				data["lastc"] = []
-				lastc = db.Query(model.Document)
+				lastc = db.Query(model.Document, keys_only=True)
 				lastc.ancestor(dq)
 				lastc.order("-created")
-				for p in lastc.run(limit=8):
+				for k in lastc.run(limit=8):
+					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
 					p.name = page.name
 					data["lastc"].append(p)
 				# Last modified docs
 				data["lastm"] = []
-				lastm = db.Query(model.Document)
+				lastm = db.Query(model.Document, keys_only=True)
 				lastm.ancestor(dq)
 				lastm.order("-modified")
-				for p in lastm.run(limit=8):
+				for k in lastm.run(limit=8):
+					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
 					p.name = page.name
 					data["lastm"].append(p)
 				# 10 Favorite list
 				data["lastfav"] = []
-				favl = db.Query(model.Document)
+				favl = db.Query(model.Document, keys_only=True)
 				favl.ancestor(dq)
 				favl.filter("isfav =", True)
 				favn = 0
-				for p in favl.run(limit=7):
+				for k in favl.run(limit=7):
+					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
 					p.name = page.name
@@ -324,9 +325,8 @@ class DocList(webapp2.RequestHandler):
 			return
 
 		# Get user
-		query = db.Query(model.User)
-		query.filter('handler =', user.nickname())
-		dq = query.get()
+		dq = database.getUserDataByHandler(user.nickname())
+
 
 		# User not registered
 		if not dq:
@@ -355,6 +355,8 @@ class DocList(webapp2.RequestHandler):
 
 class PageList(webapp2.RequestHandler):
 	def get(self, user, durl):
+
+		from google.appengine._internal.django.utils.safestring import mark_safe
 		u = users.get_current_user()
 
 		# Can't see other people's indexes
