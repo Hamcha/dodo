@@ -1,11 +1,11 @@
 ## Hamcha's stuff License ##
 
-You are permitted to do anything you want (use, edit, redistribuite, sell.. everything) with all the code that was written by me and published under this license, just don't patent anything and sue me.
-Also, while I'd like to help you if you had any problems, This software doesn't come with any warranty and I'm not *required* to give you any support.
+You are permitted to do anything you want (use, edit, redistribuite, sell.. *everything*) with all the code that was written by me and published under this license, just don't patent anything and sue me.  
+Also, while I'd like to help you if you had any problems, this software doesn't come with any warranty and I'm not *required* to give you any support.
 
 Note that this software package does come with stuff I haven't built myself and that it has own license, in fact:
 
-This software package includes jQuery and Showdown.js.
+This software package includes [jQuery](http://jquery.com/) and [Showdown.js](https://github.com/coreyti/showdown).
 
 -----------------------------------------------------------------------
 
