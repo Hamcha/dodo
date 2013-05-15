@@ -27,3 +27,9 @@ Besides, App Engine is free to a certain extent and you get full administrator r
 ## Okay, installed, how do I use it? ##
 
 Tutorials are coming... just be patient..
+
+## Thanks to ##
+
+- Imperonism for the Dodo logo (SVG, awesome!)
+- jQuery for the awesome library
+- Showdown.js for the even more awesome library

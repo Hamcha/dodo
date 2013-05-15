@@ -183,3 +183,6 @@ cyan { color: #0cf;}
 	display: block; padding: 5px;
 	background-color: rgba(255,0,0,.3); color: #f00; 
 }
+
+img.logo { width: 200px; }
+img.symbol { z-index: -1; position: fixed; top: 20%; left: 20%; width: 50%; opacity: 0.2; }

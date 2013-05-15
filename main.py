@@ -1,7 +1,13 @@
 import webapp2
 import views
+import dodoapi
 
 app = webapp2.WSGIApplication([
+	# APIs
+	('/api/user?', dodoapi.GetUser),
+	('/api/list([^.]+)?', dodoapi.DocList),
+	('/api/read/([^/]+?)/([^/.]+)?(.[^/.]+)?', dodoapi.ViewDocument),
+	# Browsable
 	('/', views.Homepage),
 	('/acp', views.AdminCP),
 	('/update', views.Update),
