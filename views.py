@@ -312,6 +312,7 @@ class Homepage(webapp2.RequestHandler):
 			data["url"] = users.create_login_url("/")
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "home.html")
+		
 		self.response.headers ['Content-Type'] = 'text/html'
 		self.response.out.write (template.render (path, data))
 

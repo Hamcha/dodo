@@ -2,9 +2,16 @@ window.onerror = (message, url, linenumber) ->
 	$(".errorbox").html("<div class=\"error\">"+linenumber+" : "+message+"</div>");
 	return true
 
+converter = null
+
 $(document).ready () ->
 	hidden = false
 	horizontal = false
+
+	$("#drophide").hide()
+	$(document).filedrop { callback : fileDrop }
+	$(document).on "dragenter", dragEnter
+	$(document).on "dragleave", dragLeave
 
 	$('textarea#editor').on 'change keyup', () ->
 		return if hidden
@@ -50,6 +57,31 @@ $(document).ready () ->
 	html = converter.makeHtml $("#editor").val()
 	$("#result").html html
 
+dragging = 0
+
+dragEnter = () ->
+	dragging += 1
+	$("#drophide").fadeIn "fast"
+	return false
+
+dragLeave = () ->
+	dragging -= 1
+	if dragging <= 0
+		dragging = 0
+		$("#drophide").fadeOut "fast"
+	return false
+	
+fileDrop = (fileData) ->
+	$("#drophide").fadeOut "fast"
+	try
+		doc = JSON.parse fileData
+	catch error
+		alert "Not a valid Dodo home document"
+		return
+	$("#editor").val(doc.data)
+	$('input#docname').val(doc.title)
+	html = converter.makeHtml $("#editor").val()
+	$("#result").html html
 
 redirect = (data) ->
 	location.href = document.URL.replace(/\/edit(.*)/,"")

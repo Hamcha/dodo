@@ -45,6 +45,8 @@ class ViewDocument(webapp2.RequestHandler):
 				data["content"] = mark_safe(pdata.content)
 				data["pageurl"] = durl + "." + page
 
+		
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'application/json'
 		self.response.out.write (json.dumps(data))
 
@@ -65,6 +67,8 @@ class GetUser(webapp2.RequestHandler):
 			self.error(403)
 			return
 		
+		
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'application/json'
 		self.response.out.write (json.dumps(data))
 
@@ -99,5 +103,6 @@ class DocList(webapp2.RequestHandler):
 			x["name"] = page.name
 			data["dlist"].append(x)
 
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'application/json'
 		self.response.out.write (json.dumps(data["dlist"]))
