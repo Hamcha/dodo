@@ -9,7 +9,7 @@ import json
 
 class ViewDocument(webapp2.RequestHandler):
 
-	def get(self, user, durl, page):
+	def get(self, user, durl, page=None):
 		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		dq = database.getUserData(user)
@@ -29,6 +29,7 @@ class ViewDocument(webapp2.RequestHandler):
 
 		if not doc:
 			self.error(404)
+			return
 		else:
 			# Retrieve page
 			if page is None or not page.strip():
@@ -40,6 +41,7 @@ class ViewDocument(webapp2.RequestHandler):
 
 			if not pdata:
 				self.error(404)
+				return
 			else:
 				data["title"] = pdata.name
 				data["content"] = mark_safe(pdata.content)

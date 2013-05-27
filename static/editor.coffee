@@ -1,8 +1,11 @@
+window.editor = true
+
 window.onerror = (message, url, linenumber) ->
 	$(".errorbox").html("<div class=\"error\">"+linenumber+" : "+message+"</div>");
 	return true
 
 converter = null
+saving = false
 
 $(document).ready () ->
 	hidden = false
@@ -12,6 +15,8 @@ $(document).ready () ->
 	$(document).filedrop { callback : fileDrop }
 	$(document).on "dragenter", dragEnter
 	$(document).on "dragleave", dragLeave
+	$(document).on "drop", () ->
+		$("#drophide").hide()
 
 	$('textarea#editor').on 'change keyup', () ->
 		return if hidden
@@ -22,10 +27,17 @@ $(document).ready () ->
 	$('textarea#editor').focus()
 	if location.hash? and location.hash != ""
 		$('input#docname').val(location.hash.replace("#",""))
-	$("#discard").click redirect
+	$("#discard").click () ->
+		return if saving
+		redirect()
 	$("#save").click () ->
+		return if saving
+		saving = true
 		data = $("#editor").val()
 		name = $('input#docname').val()
+		$("#save").css { "color" : "#777" }
+		$("#discard").css { "color" : "#777" }
+		$("#save").html "Saving..."
 		($.post document.URL, { title: name, content: data }).done(redirect).error throwerror
 		return
 	$("#hide").click () ->

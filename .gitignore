@@ -169,3 +169,4 @@ pip-log.txt
 favicon.ico
 .sass-cache/
 static/apple-touch-icon-*.png
+static/dungeon/

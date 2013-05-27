@@ -7,10 +7,20 @@ from google.appengine.api import users
 import model
 import database
 
+experimental = False
+
+# Set landing page
+# Example: /user/doc.page is ["user", "doc", "page"]
+# Set to None to land on the Login Page (like previous versions of dodo)
+homepage = ["hamcha", "dodo", "landing"]
+
 class ViewDocument(webapp2.RequestHandler):
 
-	def get(self, user, durl, page):
+	def get(self, user, durl, page = None):
 		from google.appengine._internal.django.utils.safestring import mark_safe
+
+		data = {}
+		data = enrich(data)
 
 		dq = database.getUserData(user)
 
@@ -24,7 +34,6 @@ class ViewDocument(webapp2.RequestHandler):
 
 		doc = database.getDocument(dq, durl)
 
-		data = {}
 		user = users.get_current_user()
 		data["durl"] = durl
 		data["iscreator"] = False if not user else user.nickname() == dq.handler
@@ -61,12 +70,16 @@ class ViewDocument(webapp2.RequestHandler):
 
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "document.html")
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'text/html'
 		self.response.out.write (template.render (path, data))
 
 class EditDocument(webapp2.RequestHandler):
-	def get(self, user, durl, page):
+	def get(self, user, durl, page = None):
 		from google.appengine._internal.django.utils.safestring import mark_safe
+
+		data = {}
+		data = enrich(data)
 
 		dq = database.getUserData(user)
 
@@ -77,7 +90,6 @@ class EditDocument(webapp2.RequestHandler):
 
 		doc = database.getDocument(dq, durl)
 
-		data = {}
 		user = users.get_current_user()
 		data["iscreator"] = user.nickname() == dq.handler
 		if users.is_current_user_admin():
@@ -109,10 +121,11 @@ class EditDocument(webapp2.RequestHandler):
 
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "editor.html")
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'text/html'
 		self.response.out.write (template.render (path, data))
 
-	def post(self, user, durl, page):
+	def post(self, user, durl, page = None):
 		import datetime
 		dq = database.getUserData(user)
 
@@ -167,12 +180,14 @@ class DeleteDocument(webapp2.RequestHandler):
 
 		dq = database.getUserData(user)
 
+		data = {}
+		data = enrich(data)
+
 		# User inexistant (Wrong url?)
 		if not dq:
 			self.error(404)
 			return
 
-		data = {}
 		user = users.get_current_user()
 		data["iscreator"] = user.nickname() == dq.handler
 		if users.is_current_user_admin():
@@ -208,6 +223,7 @@ class DeleteDocument(webapp2.RequestHandler):
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "delete.html")
 		self.response.headers ['Content-Type'] = 'text/html'
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.out.write (template.render (path, data))
 
 	def post(self, user, durl, page):
@@ -255,16 +271,18 @@ class DeleteDocument(webapp2.RequestHandler):
 
 		self.response.out.write ("done")
 
-class Homepage(webapp2.RequestHandler):
+class LoginPage(webapp2.RequestHandler):
 	def get(self):
+		
 		data = {}
+		data = enrich(data)
 		data["denied"] = True
 		# Get user status
 		user = users.get_current_user()
 		if user:
 			data["islogged"] = True
 			data["name"] = user.nickname()
-			data["url"] = users.create_logout_url("/")
+			data["url"] = users.create_logout_url("/home")
 			dq = database.getUserDataByHandler(user.nickname())
 			if dq:
 				data["denied"] = False
@@ -314,11 +332,58 @@ class Homepage(webapp2.RequestHandler):
 		path = os.path.join (os.path.dirname (__file__), "template", "home.html")
 		
 		self.response.headers ['Content-Type'] = 'text/html'
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.out.write (template.render (path, data))
+
+class HomePage(webapp2.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if user:
+			# Get user
+			dq = database.getUserDataByHandler(user.nickname())
+
+			# User not registered
+			if dq or homepage is None:
+				self.redirect_to("login")
+				return
+		from google.appengine._internal.django.utils.safestring import mark_safe
+
+		data = {}
+		data = enrich(data)
+		data["durl"] = homepage[1]
+
+		dq = database.getUserData(homepage[0])
+		doc = database.getDocument(dq, data["durl"])
+
+		page = homepage[2]
+
+		# Retrieve page
+		if page is None or not page.strip():
+			page = "home"
+		else:
+			page = page.replace(".","")
+
+		data["ispinned"] = doc.isfav
+
+		pdata = database.getPage(doc,page)
+
+		data["title"] = pdata.name
+		data["content"] = mark_safe(pdata.content)
+		data["pageurl"] = homepage[1] + "." + page
+
+		# Render template
+		path = os.path.join (os.path.dirname (__file__), "template", "document.html")
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
+		self.response.headers ['Content-Type'] = 'text/html'
+		self.response.out.write (template.render (path, data))
+
+
+
 
 class DocList(webapp2.RequestHandler):
 	def get(self, what):
 		data = {}
+		data = enrich(data)
 
 		user = users.get_current_user()
 		if not user:
@@ -327,7 +392,6 @@ class DocList(webapp2.RequestHandler):
 
 		# Get user
 		dq = database.getUserDataByHandler(user.nickname())
-
 
 		# User not registered
 		if not dq:
@@ -352,10 +416,13 @@ class DocList(webapp2.RequestHandler):
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "list.html")
 		self.response.headers ['Content-Type'] = 'text/html'
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.out.write (template.render (path, data))
 
 class PageList(webapp2.RequestHandler):
 	def get(self, user, durl):
+		data = {}
+		data = enrich(data)
 
 		from google.appengine._internal.django.utils.safestring import mark_safe
 		u = users.get_current_user()
@@ -365,7 +432,6 @@ class PageList(webapp2.RequestHandler):
 			self.error(404)
 			return
 
-		data = {}
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
@@ -392,11 +458,13 @@ class PageList(webapp2.RequestHandler):
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "document.html")
 		self.response.headers ['Content-Type'] = 'text/html'
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.out.write (template.render (path, data))
 
 class AdminCP(webapp2.RequestHandler):
 	def get(self):
 		data = {}
+		data = enrich(data)
 		data["denied"] = True
 		# Get user status
 		user = users.get_current_user()
@@ -412,6 +480,7 @@ class AdminCP(webapp2.RequestHandler):
 
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "admin.html")
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'text/html'
 		self.response.out.write (template.render (path, data))
 	def post(self):
@@ -438,7 +507,7 @@ class Update(webapp2.RequestHandler):
 			self.error(403)
 
 class PinDocument(webapp2.RequestHandler):
-	def post(self, user, durl, page):
+	def post(self, user, durl, page=None):
 		u = users.get_current_user()
 
 		# Can't pin other people's docs
@@ -446,7 +515,6 @@ class PinDocument(webapp2.RequestHandler):
 			self.error(404)
 			return
 
-		data = {}
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
@@ -467,3 +535,7 @@ class PinDocument(webapp2.RequestHandler):
 			self.response.out.write("pinned")
 		else:
 			self.response.out.write("unpinned")
+
+def enrich(data):
+	data["experimental"] = experimental
+	return data
