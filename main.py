@@ -26,5 +26,6 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/<user>/<durl>/index', handler=views.PageList, name='doc-index'),
 
 	webapp2.Route(r'/<user>/<durl><page:\.(.+)?>', handler=views.ViewDocument, name='view-doc-full'),
-	webapp2.Route(r'/<user>/<durl>', handler=views.ViewDocument, name='view-doc-home')
+	webapp2.Route(r'/<user>/<durl>', handler=views.ViewDocument, name='view-doc-home'),
+	webapp2.Route(r'/<user>/', handler=views.ViewDocument, name='view-doc-user')
 ], debug=True)

@@ -16,7 +16,7 @@ homepage = ["hamcha", "dodo", "landing"]
 
 class ViewDocument(webapp2.RequestHandler):
 
-	def get(self, user, durl, page = None):
+	def get(self, user, durl = None, page = None):
 		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		data = {}
