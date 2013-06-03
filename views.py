@@ -7,7 +7,7 @@ from google.appengine.api import users
 import model
 import database
 
-experimental = False
+experimental = True
 
 # Set landing page
 # Example: /user/doc.page is ["user", "doc", "page"]
@@ -217,7 +217,7 @@ class DeleteDocument(webapp2.RequestHandler):
 				return
 			else:
 				data["page"] = pdata.surl
-				data["pname"] = pdata.name
+				data["pname"] = pdata.name if pdata.name != "" else "[Untitled Page]"
 				data["user"] = dq.name
 
 		# Render template
@@ -296,7 +296,7 @@ class LoginPage(webapp2.RequestHandler):
 					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
-					p.name = page.name
+					p.name = page.name if page.name != "" else "[Untitled Page]"
 					data["lastc"].append(p)
 				# Last modified docs
 				data["lastm"] = []
@@ -307,7 +307,7 @@ class LoginPage(webapp2.RequestHandler):
 					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
-					p.name = page.name
+					p.name = page.name if page.name != "" else "[Untitled Page]"
 					data["lastm"].append(p)
 				# 10 Favorite list
 				data["lastfav"] = []
@@ -319,7 +319,7 @@ class LoginPage(webapp2.RequestHandler):
 					p = database.getDocument(dq, k.name())
 					page = database.getPage(p,"home")
 					p.url = dq.name + "/" + p.surl
-					p.name = page.name
+					p.name = page.name if page.name != "" else "[Untitled Page]"
 					data["lastfav"].append(p)
 					favn += 1
 				if favn == 7:
@@ -410,7 +410,7 @@ class DocList(webapp2.RequestHandler):
 		for p in query:
 			page = database.getPage(p,"home")
 			p.url = dq.name + "/" + p.surl
-			p.name = page.name
+			p.name = page.name if page.name != "" else "[Untitled Page]"
 			data["dlist"].append(p)
 
 		# Render template
@@ -449,9 +449,9 @@ class PageList(webapp2.RequestHandler):
 		ps.ancestor(doc)
 
 		data["title"] = "Index of " + durl
-		data["content"] = "<ul>"
+		data["content"] = "<ul class=\"pageindex\">"
 		for x in ps:
-			data["content"] += "<li><a href=\"../"+durl+"."+x.surl+"\">"+x.name+"</a><br /></li>"
+			data["content"] += "<li><a href=\"../"+durl+"."+x.surl+"\"><item>"+(x.name if x.name != "" else "[Untitled Page]")+" <i>(<b>"+x.surl+"</b>)</i></item></a></li>"
 		data["content"] += "</ul>"
 		data["content"] = mark_safe(data["content"]);
 
