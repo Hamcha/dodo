@@ -226,20 +226,30 @@ div#homespot {
 #edcontainer {
   position: absolute;
   left: 10px;
-  width: 450px;
+  right: 55%;
   top: 60px;
   bottom: 50px;
   border: 1px solid #cccccc;
-  padding: 0;
+  padding: 10px;
+  border-right: 0;
   background-color: #fff; }
   #edcontainer #editor {
-    position: absolute;
     border: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 10px; }
+    width: 100%;
+    height: 100%;
+    outline: none; }
+
+#previewbox {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  text-align: right;
+  line-height: .5em;
+  color: #fff;
+  background-color: #bbb;
+  padding: 10px;
+  border-right: 0;
+  text-transform: uppercase; }
 
 p {
   margin-bottom: 10px; }
@@ -250,7 +260,7 @@ p {
   border: 1px solid #cccccc;
   bottom: 50px;
   right: 10px;
-  width: 460px;
+  left: 45%;
   top: 60px;
   padding: 10px;
   overflow: auto; }

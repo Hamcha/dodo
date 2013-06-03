@@ -128,10 +128,15 @@ div#homespot {
 
 #edcontainer {
 	position: absolute;
-	left: 10px; width: 450px; top: 60px; bottom: 50px;
-	border: 1px solid #ccc; padding: 0;
+	left: 10px; right: 55%; top: 60px; bottom: 50px;
+	border: 1px solid #ccc; padding: 10px; border-right: 0;
 	background-color: #fff;
-	#editor { position:absolute; border: 0; left: 0; right: 0; top: 0; bottom: 0; padding: 10px; }
+	#editor { border: 0; width: 100%; height: 100%; outline: none;}
+}
+
+#previewbox {
+	position: absolute; right: 10px; top: 60px; text-align: right; line-height: .5em; color: #fff;
+	background-color: #bbb; padding: 10px; border-right: 0; text-transform: uppercase;
 }
 
 p { margin-bottom: 10px; }
@@ -139,9 +144,8 @@ p { margin-bottom: 10px; }
 #result {
 	position: absolute; background-color: #fff;
 	border: 1px solid #ccc; bottom: 50px;
-	right: 10px; width: 460px; top: 60px;
-	padding: 10px;
-	overflow: auto;
+	right: 10px; left: 45%; top: 60px;
+	padding: 10px; overflow: auto;
 	p { margin-top: 0; }
 }
 

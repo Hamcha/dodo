@@ -7,6 +7,8 @@ window.onerror = (message, url, linenumber) ->
 converter = null
 saving = false
 
+curw = 960
+
 $(document).ready () ->
 	hidden = false
 	horizontal = false
@@ -59,11 +61,15 @@ $(document).ready () ->
 		return if hidden
 		horizontal = !horizontal
 		if horizontal
-			$('#result').animate { width:"918px", top: "50%" }
-			$('#edcontainer').animate { width:"938px", bottom: "51%" }
+			$("#superwrapper").css { width: "960px", "margin" : "0 auto" }
+			$('#result').css { width:"918px", top: "50%", left: "auto" }
+			$('#edcontainer').css { width:"918px", bottom: "51%", "border-right" : "1px solid #ccc" }
+			$('#previewbox').css { top:"50%" }
 		else
-			$('#result').animate { width:"460px", top: "60px" }
-			$('#edcontainer').animate { width:"450px", bottom: "50px" }
+			$("#superwrapper").css { width: "auto", "margin" : "0 20px" }
+			$('#result').css { width:"auto", top: "60px", left: "45%" }
+			$('#edcontainer').css { width:"auto", bottom: "50px", "border-right" : "0" }
+			$('#previewbox').css { top:"60px" }
 
 	converter = new Showdown.converter()
 	html = converter.makeHtml $("#editor").val()
