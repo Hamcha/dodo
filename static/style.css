@@ -277,6 +277,7 @@ wrapper {
   right: 0;
   padding: 10px;
   background-color: #fff;
+  margin: 0 20px;
   box-shadow: 0 0 10px #cccccc; }
 
 input.inh1 {
@@ -381,3 +382,6 @@ ul.pageindex {
     ul.pageindex item:hover {
       background-color: #ddd;
       border-color: #aaa; }
+
+#editor {
+  resize: none; }

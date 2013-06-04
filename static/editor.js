@@ -76,20 +76,26 @@
           an = horizontal ? {
             bottom: "50px"
           } : {
-            width: "935px"
+            right: "10px"
           };
           $('#edcontainer').animate(an);
           $("#hide").text("Show preview");
+        });
+        $('#edcontainer').css({
+          "border-right": "1px solid #ccc"
         });
       } else {
         an = horizontal ? {
           bottom: "51%"
         } : {
-          width: "450px"
+          right: "55%"
         };
         $('#edcontainer').animate(an, function() {
           $('#result').fadeIn("fast");
           $("#hide").text("Hide preview");
+        });
+        $('#edcontainer').css({
+          "border-right": "0"
         });
       }
     });
@@ -104,12 +110,12 @@
           "margin": "0 auto"
         });
         $('#result').css({
-          width: "918px",
+          right: "10px",
           top: "50%",
-          left: "auto"
+          left: "10px"
         });
         $('#edcontainer').css({
-          width: "918px",
+          right: "10px",
           bottom: "51%",
           "border-right": "1px solid #ccc"
         });

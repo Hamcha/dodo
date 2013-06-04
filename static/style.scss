@@ -152,7 +152,7 @@ p { margin-bottom: 10px; }
 wrapper {
 	padding: 20px 30px 30px 30px; position: absolute; top: 10px; bottom: 10px;
 	display: block; left: 0; right: 0; padding: 10px;
-	background-color: #fff;
+	background-color: #fff; margin: 0 20px;
 	box-shadow: 0 0 10px #ccc;
 }
 
@@ -211,4 +211,8 @@ ul.pageindex {
 		margin: 3px 0; padding: 5px 10px;
 		&:hover{ background-color: #ddd; border-color: #aaa; }
 	}
+}
+
+#editor { 
+	resize:none; 
 }

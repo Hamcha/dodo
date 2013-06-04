@@ -46,24 +46,26 @@ $(document).ready () ->
 		hidden = !hidden
 		if hidden
 			$('#result').fadeOut "fast", () ->
-				an = if horizontal then {bottom:"50px"} else {width:"935px"}
+				an = if horizontal then {bottom:"50px"} else {right:"10px"}
 				$('#edcontainer').animate an
 				$("#hide").text("Show preview")
 				return
+			$('#edcontainer').css { "border-right": "1px solid #ccc" }
 		else
-			an = if horizontal then {bottom:"51%"} else {width:"450px"}
+			an = if horizontal then {bottom:"51%"} else {right:"55%"}
 			$('#edcontainer').animate an, () ->
 				$('#result').fadeIn "fast"
 				$("#hide").text("Hide preview")
 				return
+			$('#edcontainer').css { "border-right": "0" }
 		return
 	$("#switch").click () ->
 		return if hidden
 		horizontal = !horizontal
 		if horizontal
 			$("#superwrapper").css { width: "960px", "margin" : "0 auto" }
-			$('#result').css { width:"918px", top: "50%", left: "auto" }
-			$('#edcontainer').css { width:"918px", bottom: "51%", "border-right" : "1px solid #ccc" }
+			$('#result').css { right:"10px", top: "50%", left: "10px" }
+			$('#edcontainer').css { right:"10px", bottom: "51%", "border-right" : "1px solid #ccc" }
 			$('#previewbox').css { top:"50%" }
 		else
 			$("#superwrapper").css { width: "auto", "margin" : "0 20px" }

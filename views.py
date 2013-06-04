@@ -7,7 +7,7 @@ from google.appengine.api import users
 import model
 import database
 
-experimental = True
+experimental = True if "experimental" in os.environ['CURRENT_VERSION_ID'] else False
 
 # Set landing page
 # Example: /user/doc.page is ["user", "doc", "page"]
