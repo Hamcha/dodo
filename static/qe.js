@@ -66,7 +66,7 @@
     dsource = event.origin;
     docurl = e.data.url;
     if (docurl[docurl.length - 1] === "/") {
-      docurl = docurl.substring(0, docurl.length - 1);
+      docurl += docurl.match("http://(.*)/([^\]*)/")[2];
     }
     $("#title").val(e.data.title);
     return $("#editor").val(e.data.content);
