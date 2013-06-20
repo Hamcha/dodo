@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quick Edit</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
+	<link href="/style.css" rel="stylesheet" type="text/css" />
+	<script src="/jquery.min.js"></script>
+	<script src="/qe.js"></script>
+	<style>
+		body { margin: 0; padding: 0; }
+		#title { 
+			position: absolute; top: 0; left: 0; right: 0; 
+			font-size: 1.7em; padding: 5px; font-family: 'Lato', sans-serif; font-weight: 300; 
+			text-align: center;
+		}
+		#editor { 
+			position: absolute; top: 50px; bottom: 40px; left: 0; right: 0; padding: 10px;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="title" />
+	<textarea id="editor"></textarea>
+	<div id="edbuttons" style="bottom: 0;">
+		<a id="save" class="button">Save</a> <a id="saveexit" class="button">Save and Exit</a> <a id="discard" class="button">Discard changes</a>
+	</div>
+	<div class="errorbox" ></div>
+</body>
+</html>

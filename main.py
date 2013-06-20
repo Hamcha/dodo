@@ -1,6 +1,7 @@
 import webapp2
 import views
 import dodoapi
+import config
 
 app = webapp2.WSGIApplication([
 

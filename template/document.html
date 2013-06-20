@@ -6,29 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="/style.css" />
 	<script src="/jquery.min.js"></script>
 	<script src="/showdown.js"></script>
-	<script>
-	editor = false;
-	$(document).ready(function (){
-	    $("#gohome").attr("href",location.origin);
-		var converter, html;
-	    converter = new Showdown.converter();
-	    html = converter.makeHtml($("#content").val());
-	    $("content").html(html);
-	    $("#pin").click(function(){
-	    	$.post(document.URL+"/pin", function(data){
-	    		if (data === "pinned")
-	    		{
-	    			$("#pin").html("[pinned!]").css("color","#a22");
-	    			setTimeout(function(){$("#pin").html("[unpin]").css("color","#da2");},1000);
-	    		} else {
-	    			$("#pin").html("[unpinned!]").css("color","#a22");
-	    			setTimeout(function(){$("#pin").html("[pin]").css("color","#da2");},1000);
-	    		}
-	    	});
-	    });
-	});
-    </script>
-
+	<script src="/document.js"></script>
+	<script>editor = false;</script>
 	{% if iserror %}
 	<style>html, body { width: 100%; height: 100%; overflow: hidden; }</style>
 	{% endif %}
@@ -42,8 +21,8 @@
 	{% endif %}
 	{% if iscreator and not iserror %}
 	<div id="homespot"><a id="gohome">[home]</a>&nbsp;<a class="pin" id="pin">{% if ispinned %}[unpin]{% else %}[pin]{% endif %}</a></div>
-	<div id="editspot"><a href="{{ pageurl }}/edit">[edit]</a>&nbsp;<a href="{{ pageurl }}/delete" class="delete">[delete]</a></div>{% endif %}
-	<header><h1 style="font-weight: 300;">{{ title }}</h1></header><br />
+	<div id="editspot"><a id="quickedit"><green>[QE]</green></a> <a href="{{ pageurl }}/edit">[edit]</a>&nbsp;<a href="{{ pageurl }}/delete" class="delete">[delete]</a></div>{% endif %}
+	<header><h1 style="font-weight: 300;" id="title">{{ title }}</h1></header><br />
 	<content><textarea id="content">{{ content }}</textarea></content>
 	<br /></container>{% if experimental %}<center style="margin: 0 auto;"><i>This is the <red>[Experimental channel]</red>, anything on this version is to be considered unstable and still in development.</i></center>{% endif %}
 	{% if iserror %}</td></tr></table>{% endif %}

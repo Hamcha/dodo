@@ -6,13 +6,9 @@ from google.appengine.api import users
 
 import model
 import database
+import config
 
 experimental = True if "experimental" in os.environ['CURRENT_VERSION_ID'] else False
-
-# Set landing page
-# Example: /user/doc.page is ["user", "doc", "page"]
-# Set to None to land on the Login Page (like previous versions of dodo)
-homepage = ["hamcha", "dodo", "landing"]
 
 class ViewDocument(webapp2.RequestHandler):
 
@@ -91,6 +87,10 @@ class EditDocument(webapp2.RequestHandler):
 		doc = database.getDocument(dq, durl)
 
 		user = users.get_current_user()
+		if not user:
+			self.error(403)
+			return
+		
 		data["iscreator"] = user.nickname() == dq.handler
 		if users.is_current_user_admin():
 			data["iscreator"] = True
@@ -343,19 +343,19 @@ class HomePage(webapp2.RequestHandler):
 			dq = database.getUserDataByHandler(user.nickname())
 
 			# User not registered
-			if dq or homepage is None:
+			if dq or config.homepage is None:
 				self.redirect_to("login")
 				return
 		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		data = {}
 		data = enrich(data)
-		data["durl"] = homepage[1]
+		data["durl"] = config.homepage[1]
 
-		dq = database.getUserData(homepage[0])
+		dq = database.getUserData(config.homepage[0])
 		doc = database.getDocument(dq, data["durl"])
 
-		page = homepage[2]
+		page = config.homepage[2]
 
 		# Retrieve page
 		if page is None or not page.strip():
@@ -369,7 +369,7 @@ class HomePage(webapp2.RequestHandler):
 
 		data["title"] = pdata.name
 		data["content"] = mark_safe(pdata.content)
-		data["pageurl"] = homepage[1] + "." + page
+		data["pageurl"] = config.homepage[1] + "." + page
 
 		# Render template
 		path = os.path.join (os.path.dirname (__file__), "template", "document.html")

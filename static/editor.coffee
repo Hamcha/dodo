@@ -6,6 +6,7 @@ window.onerror = (message, url, linenumber) ->
 
 converter = null
 saving = false
+unchanged = true
 
 curw = 960
 
@@ -23,25 +24,29 @@ $(document).ready () ->
 	$('textarea#editor').on 'change keyup', () ->
 		return if hidden
 		$(".errorbox").html ""
+		if unchanged
+			unchanged = false
+			document.title = "* " + document.title + " *" 
 		html = converter.makeHtml $("#editor").val()
 		$("#result").html html
 		return
+	$('#docname').on 'change keyup', () ->
+		unchanged = false
+		document.title = "* Editing " + $('#docname').val() + " *" 
 	$('textarea#editor').focus()
 	if location.hash? and location.hash != ""
 		$('input#docname').val(location.hash.replace("#",""))
+		document.title = "Editing " + $('#docname').val() 
 	$("#discard").click () ->
 		return if saving
 		redirect()
-	$("#save").click () ->
-		return if saving
-		saving = true
-		data = $("#editor").val()
-		name = $('input#docname').val()
-		$("#save").css { "color" : "#777" }
-		$("#discard").css { "color" : "#777" }
+	$("#save").click () -> 
 		$("#save").html "Saving..."
-		($.post document.URL, { title: name, content: data }).done(redirect).error throwerror
-		return
+		save restoresv, throwerror
+	$("#saveexit").click () -> 
+		$("#saveexit").html "Saving..."
+		save redirect, throwerror
+		
 	$("#hide").click () ->
 		hidden = !hidden
 		if hidden
@@ -104,9 +109,42 @@ fileDrop = (fileData) ->
 	$("#result").html html
 
 redirect = (data) ->
+	unchanged = true
+	saving = false
 	location.href = document.URL.replace(/\/edit(.*)/,"")
 	return
 throwerror = (data) ->
+	saving = false
 	alert "Check your console (and logs, if you can)!"
 	console.log data
 	return
+
+restoresv = () ->
+	saving = false
+	$("#save").html "Saved!"
+	if not unchanged
+		document.title = document.title.match(/(\*\s)(.*)(\s\*)/)[2]
+		unchanged = true
+	setTimeout (() -> 
+		$("#save").html "Save"
+		$("#save").css { "color" : "inherit" }
+		$("#saveexit").css { "color" : "inherit" }
+		$("#discard").css { "color" : "inherit" }
+		return
+	), 2000
+	return
+
+save = (okcb, errorcb) ->
+	return if saving
+	saving = true
+	data = $("#editor").val()
+	name = $('input#docname').val()
+	$("#save").css { "color" : "#777" }
+	$("#saveexit").css { "color" : "#777" }
+	$("#discard").css { "color" : "#777" }
+	($.post document.URL, { title: name, content: data }).done(okcb).error errorcb
+	return
+
+$(window).bind 'beforeunload', () ->
+	return if unchanged
+	return 'You have unsaved changes that will be lost if you leave now.'
