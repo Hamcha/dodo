@@ -21,10 +21,10 @@
 		{% if islogged %}
 		Sorry <b>{{ name }}</b>.<br />You haven't been granted access to the <b><i>Dodo</i></b>.<br />
 		If you logged into the wrong account, please <b>logout</b> using the following button and login again with the right account.<br /><br />
-		<a href="{{ url }}" class="button">Logout</a>
+		<a href="{{ url }}" class="button bred">Logout</a>
 		{% else %}
 		Please <b>login</b> to use <b><i>Dodo</i></b><br /><br />
-		<a href="{{ url }}" class="button">Login</a>
+		<a href="{{ url }}" class="button bgreen">Login</a>
 		{% endif %}
 		</container>
 	{% if experimental %}
@@ -37,17 +37,17 @@
 			<img src="/logo.svg" class="logo" />{% if experimental %}<div style="position: absolute;left: 50%;display: block;top: 0; color: #F7225E; font-weight: 300; font-size: 1.1em;">[Experimental]</div>{% endif %}</header><br />
 		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
 		<div id="buttons" style="text-align: center;">
-			<a class="button" id="newdoc">New doc</a>
-			<a class="button" id="list" href="list">List all docs</a>
-			<a class="button" id="logout" href="{{ url }}">Logout</a>
+			<a class="button bblue" id="newdoc">New document</a>
+			<a class="button bgray" id="list" href="list">List all documents</a>
+			<a class="button bgray" id="logout" href="{{ url }}">Logout</a>
 		</div>
 		<div id="newdocbox" style="text-align: center;"><hr />
 			<header><h3>Document name</h3></header>
 			<input class="newbox" type="text" style="width: 280px; margin: 10px 0;" id="sname" value="Untitled" /><br />
 			<h4>Document URL</h4><br />
 			<span id="newurl"></span><input class="newbox" type="text" id="surl" style="text-align: left; padding-left: 5px;width: 100px; margin: 10px 5px;" value="untitled"/><br />
-			<a class="button" id="dodoc">Create page</a>
-			<a class="button" id="canceldoc">Nevermind</a>
+			<a class="button bgreen" id="dodoc">Create page</a>
+			<a class="button bred" id="canceldoc">Nevermind</a>
 		<hr /></div>
 		<br />
 		<center><div class="box" style="width: 270px;"><header><h3>Last created</h3></header><br />

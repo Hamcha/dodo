@@ -199,15 +199,9 @@
     }
     setTimeout((function() {
       $("#save").html("Save");
-      $("#save").css({
-        "color": "inherit"
-      });
-      $("#saveexit").css({
-        "color": "inherit"
-      });
-      $("#discard").css({
-        "color": "inherit"
-      });
+      $("#save").removeClass("disabled");
+      $("#saveexit").removeClass("disabled");
+      $("#discard").removeClass("disabled");
     }), 2000);
   };
 
@@ -219,15 +213,9 @@
     saving = true;
     data = $("#editor").val();
     name = $('input#docname').val();
-    $("#save").css({
-      "color": "#777"
-    });
-    $("#saveexit").css({
-      "color": "#777"
-    });
-    $("#discard").css({
-      "color": "#777"
-    });
+    $("#save").addClass("disabled");
+    $("#saveexit").addClass("disabled");
+    $("#discard").addClass("disabled");
     ($.post(document.URL, {
       title: name,
       content: data

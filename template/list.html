@@ -9,11 +9,12 @@
 </head>
 <body>
 	<container>
-	<header><h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1></header><br />
-	<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
+	<header style="position:relative;"><!--<h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1>-->
+			<img src="/logo.svg" class="logo" />{% if experimental %}<div style="position: absolute;left: 50%;display: block;top: 0; color: #F7225E; font-weight: 300; font-size: 1.1em;">[Experimental]</div>{% endif %}</header><br />
+		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
 	<div id="buttons" style="text-align: center;">
-		<a class="button" href="/">Homepage</a>
-		<a class="button" id="logout" href="{{ url }}">Logout</a>
+		<a class="button bgray" href="/">Homepage</a>
+		<a class="button bgray" id="logout" href="{{ url }}">Logout</a>
 	</div>
 	<center><div class="box"><header><h3>{{ title }}</h3></header><br />
 		{% for doc in dlist %}

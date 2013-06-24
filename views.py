@@ -393,6 +393,8 @@ class DocList(webapp2.RequestHandler):
 		# Get user
 		dq = database.getUserDataByHandler(user.nickname())
 
+		data["name"] = user.nickname()
+
 		# User not registered
 		if not dq:
 			self.error(403)

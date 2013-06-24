@@ -56,25 +56,51 @@ a.button, a.button:visited {
   margin: 5px;
   padding: 4px 10px 6px 10px;
   min-width: 60px;
-  color: #000;
-  border: 1px solid #999999;
-  background: #eee;
-  background: -moz-linear-gradient(top, white 0%, #cccccc 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, white 0%, #cccccc 100%);
-  background: -o-linear-gradient(top, white 0%, #cccccc 100%);
-  background: -ms-linear-gradient(top, white 0%, #cccccc 100%);
-  background: linear-gradient(to bottom, white 0%, #cccccc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#ccc',GradientType=0 ); }
-  a.button:hover, a.button:visited:hover {
-    background: #ccc;
-    background: -moz-linear-gradient(top, #cccccc 0%, #aaaaaa 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cccccc), color-stop(100%, #aaaaaa));
-    background: -webkit-linear-gradient(top, #cccccc 0%, #aaaaaa 100%);
-    background: -o-linear-gradient(top, #cccccc 0%, #aaaaaa 100%);
-    background: -ms-linear-gradient(top, #cccccc 0%, #aaaaaa 100%);
-    background: linear-gradient(to bottom, #cccccc 0%, #aaaaaa 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='#aaa',GradientType=0 ); }
+  font-weight: 300;
+  font-size: 1.2em;
+  border-radius: 2px; }
+
+a.bgreen {
+  background-color: #0a2;
+  border: 1px solid #00aa22;
+  color: #fff; }
+  a.bgreen:hover {
+    background-color: #00dd2c; }
+
+a.byellow {
+  background-color: #da0;
+  border: 1px solid #ddaa00;
+  color: #fff; }
+  a.byellow:hover {
+    background-color: #ffc811; }
+
+a.bred {
+  background-color: #d20;
+  border: 1px solid #dd2200;
+  color: #fff; }
+  a.bred:hover {
+    background-color: #ff3611; }
+
+a.bblue {
+  background-color: #05c;
+  border: 1px solid #0055cc;
+  color: #fff; }
+  a.bblue:hover {
+    background-color: #006aff; }
+
+a.bpurple {
+  background-color: #d0a;
+  border: 1px solid #dd00aa;
+  color: #fff; }
+  a.bpurple:hover {
+    background-color: #ff11c8; }
+
+a.bgrey, a.bgray {
+  background-color: #eee;
+  border: 1px solid #cccccc;
+  color: #000; }
+  a.bgrey:hover, a.bgray:hover {
+    background-color: #c4c4c4; }
 
 div.box {
   display: inline-table;
@@ -104,17 +130,20 @@ hr {
 
 a.fav {
   background-color: #ffffee;
-  color: #998500;
-  border: 1px solid #ddaa22; }
+  border: 1px solid #ddaa22;
+  border-bottom: 2px solid #ddaa22;
+  color: #998500; }
   a.fav:hover {
     background-color: #ffe01a; }
 
 a.normal {
+  border: 1px solid #eeeeee;
   color: #000;
-  border: 1px solid #cccccc;
+  border-bottom: 2px solid #cccccc;
   background: #eee; }
   a.normal:hover {
-    background-color: #ccc; }
+    background-color: #ccc;
+    border-bottom-color: #aaa; }
 
 a.item, a.item:visited {
   position: relative;
@@ -124,14 +153,18 @@ a.item, a.item:visited {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 40px;
-  margin: 2px;
+  height: 45px;
+  font-size: 1.3em;
+  font-weight: 300;
+  margin: 2px 0;
   padding: 4px 70px 6px 10px;
-  width: 190px;
-  text-align: left; }
+  width: 200px;
+  text-align: left;
+  border-radius: 2px; }
   a.item id, a.item:visited id {
     position: absolute;
     left: 10px;
+    font-size: 0.7em;
     bottom: 5px;
     color: #999;
     font-family: "Courier", monospace; }
@@ -140,44 +173,70 @@ a.item, a.item:visited {
     right: 10px;
     top: 5px;
     color: #da2;
-    font-size: 20px; }
+    font-size: 20px;
+    font-weight: 400; }
 
 div#editspot {
   position: absolute;
   text-align: right;
   top: 0;
   right: 0;
-  padding: 5px 10px; }
-  div#editspot a {
+  padding: 5px; }
+  div#editspot a, div#editspot a:visited {
+    border-radius: 2px;
+    background-color: #47d;
+    font-weight: 300;
+    color: #fff;
+    padding: 2px 5px;
     cursor: pointer;
     text-decoration: none;
-    color: #47d; }
-    div#editspot a:hover {
-      color: #9ab6ed; }
+    opacity: 0.5; }
+    div#editspot a:hover, div#editspot a:visited:hover {
+      opacity: 1; }
   div#editspot a.delete {
     cursor: pointer;
     text-decoration: none;
-    color: #f08; }
+    background-color: #c03;
+    opacity: 0.5; }
     div#editspot a.delete:hover {
-      color: #ff99cf; }
+      opacity: 1; }
+  div#editspot a#quickedit {
+    background-color: #0aa;
+    opacity: 0.5; }
+    div#editspot a#quickedit:hover {
+      opacity: 1; }
 
 div#homespot {
   position: absolute;
   text-align: right;
   top: 0;
   left: 0;
-  padding: 5px 10px; }
+  padding: 5px; }
+  div#homespot a#gohome {
+    background-color: #0a3;
+    padding: 2px 5px;
+    opacity: 0.5; }
+    div#homespot a#gohome:hover {
+      opacity: 1; }
   div#homespot a, div#homespot a.visited {
+    border-radius: 2px;
+    font-weight: 300;
     text-decoration: none;
-    color: #4a7; }
-    div#homespot a:hover, div#homespot a.visited:hover {
-      color: #86ceaa; }
+    color: #fff; }
   div#homespot a.pin {
     cursor: pointer;
     text-decoration: none;
-    color: #da2; }
+    background-color: #da2;
+    padding: 2px 5px;
+    color: #fff;
+    opacity: 0.5; }
     div#homespot a.pin:hover {
-      color: #ebcc7a; }
+      opacity: 1; }
+  div#homespot a.pinned {
+    background-color: #a22;
+    opacity: 1; }
+    div#homespot a.pinned:hover {
+      opacity: 1; }
 
 ::selection {
   color: #fff;
@@ -294,6 +353,17 @@ input.inh1 {
   left: 0;
   right: 0;
   text-align: center; }
+  #edbuttons .disabled {
+    background-color: #aaa;
+    color: #444;
+    border: 1px solid #aaaaaa; }
+    #edbuttons .disabled:hover {
+      background-color: #aaa; }
+  #edbuttons .mini {
+    height: 22px;
+    opacity: .5; }
+    #edbuttons .mini:hover {
+      opacity: 1; }
 
 #edbuttons2 {
   position: absolute;

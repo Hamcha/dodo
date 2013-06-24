@@ -41,11 +41,11 @@ $(document).ready () ->
 	$("#pin").click () ->
 		$.post document.URL + "/pin", (data) ->
 			if data == "pinned"
-				restxt = "[pinned!]"
-				restore = () -> ($("#pin").html "[unpin]").css "color","#da2"
+				restxt = "pinned!"
+				restore = () -> ($("#pin").html "unpin").removeClass "pinned"
 			else
-				restxt = "[unpinned!]"
-				restore = () -> ($("#pin").html "[pin]").css "color","#da2"
+				restxt = "unpinned!"
+				restore = () -> ($("#pin").html "pin").removeClass "pinned"
 
-			$("#pin").html(restxt).css "color","#a22"
+			$("#pin").html(restxt).addClass "pinned"
 			setTimeout restore, 1000

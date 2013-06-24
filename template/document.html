@@ -20,8 +20,8 @@
 	<container style="padding: 20px 30px 30px 30px;">
 	{% endif %}
 	{% if iscreator and not iserror %}
-	<div id="homespot"><a id="gohome">[home]</a>&nbsp;<a class="pin" id="pin">{% if ispinned %}[unpin]{% else %}[pin]{% endif %}</a></div>
-	<div id="editspot"><a id="quickedit"><green>[QE]</green></a> <a href="{{ pageurl }}/edit">[edit]</a>&nbsp;<a href="{{ pageurl }}/delete" class="delete">[delete]</a></div>{% endif %}
+	<div id="homespot"><a id="gohome">home</a>&nbsp;<a class="pin" id="pin">{% if ispinned %}unpin{% else %}pin{% endif %}</a></div>
+	<div id="editspot"><a id="quickedit">QE</a> <a class="edit" href="{{ pageurl }}/edit">edit</a>&nbsp;<a href="{{ pageurl }}/delete" class="delete">delete</a></div>{% endif %}
 	<header><h1 style="font-weight: 300;" id="title">{{ title }}</h1></header><br />
 	<content><textarea id="content">{{ content }}</textarea></content>
 	<br /></container>{% if experimental %}<center style="margin: 0 auto;"><i>This is the <red>[Experimental channel]</red>, anything on this version is to be considered unstable and still in development.</i></center>{% endif %}

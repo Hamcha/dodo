@@ -63,17 +63,17 @@
       return $.post(document.URL + "/pin", function(data) {
         var restore, restxt;
         if (data === "pinned") {
-          restxt = "[pinned!]";
+          restxt = "pinned!";
           restore = function() {
-            return ($("#pin").html("[unpin]")).css("color", "#da2");
+            return ($("#pin").html("unpin")).removeClass("pinned");
           };
         } else {
-          restxt = "[unpinned!]";
+          restxt = "unpinned!";
           restore = function() {
-            return ($("#pin").html("[pin]")).css("color", "#da2");
+            return ($("#pin").html("pin")).removeClass("pinned");
           };
         }
-        $("#pin").html(restxt).css("color", "#a22");
+        $("#pin").html(restxt).addClass("pinned");
         return setTimeout(restore, 1000);
       });
     });
