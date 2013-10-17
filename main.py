@@ -1,6 +1,7 @@
 import webapp2
 import views
 import dodoapi
+import aukapi
 import config
 
 app = webapp2.WSGIApplication([
@@ -30,3 +31,16 @@ app = webapp2.WSGIApplication([
 	webapp2.Route(r'/<user>/<durl>', handler=views.ViewDocument, name='view-doc-home'),
 	webapp2.Route(r'/<user>/', handler=views.ViewDocument, name='view-doc-user')
 ], debug=True)
+
+# AUK APIs
+if config.enableAuk:
+	# Auk internal apis
+	app.router.add(webapp2.Route(r'/auk/user?', handler=aukapi.GetUser, name='auk-get-user'))
+	app.router.add(webapp2.Route(r'/auk/list<what:(.*)>', handler=aukapi.DocList, name='auk-doc-list'))
+	app.router.add(webapp2.Route(r'/auk/read/<user>/<durl><page:\.(.+)?>', handler=aukapi.ViewDocument, name='auk-view-doc-full'))
+	app.router.add(webapp2.Route(r'/auk/read/<user>/<durl>', handler=aukapi.ViewDocument, name='auk-view-doc-home'))
+	app.router.add(webapp2.Route(r'/auk/edit/<user>/<durl><page:\.(.+)?>', handler=aukapi.EditDocument, name='auk-edit-doc-full'))
+	app.router.add(webapp2.Route(r'/auk/edit/<user>/<durl>', handler=aukapi.EditDocument, name='auk-edit-doc-home'))
+	app.router.add(webapp2.Route(r'/auk/index/<user>/<durl>', handler=aukapi.PageList, name='auk-doc-index'))
+	# User apis
+	app.router.add(webapp2.Route(r'/auk/exec/<user>/<durl>', handler=aukapi.ExecScript, name='auk-script'))

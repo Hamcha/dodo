@@ -38,6 +38,7 @@ $(document).ready () ->
 
 
 receiveMessage = (e) ->
+	event = e unless event
 	return if event.origin != location.origin
 	daddy = event.source
 	dsource = event.origin

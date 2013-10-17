@@ -73,10 +73,35 @@ $(document).ready () ->
 			$('#edcontainer').css { right:"10px", bottom: "51%", "border-right" : "1px solid #ccc" }
 			$('#previewbox').css { top:"50%" }
 		else
-			$("#superwrapper").css { width: "auto", "margin" : "0 20px" }
+			$("#superwrapper").css { width: "100%", "margin" : "0 auto" }
 			$('#result').css { width:"auto", top: "60px", left: "45%" }
-			$('#edcontainer').css { width:"auto", bottom: "50px", "border-right" : "0" }
+			$('#edcontainer').css { right:"55%", bottom: "50px", "border-right" : "0" }
 			$('#previewbox').css { top:"60px" }
+
+	$("#save_dd").click () ->
+		data = $("#editor").val()
+		name = $('input#docname').val()
+		if !name? or name == ""
+			name = "Untitled"
+		exports = { "data" : data, "title" : name }
+		blob = new Blob [JSON.stringify(exports)], {type: 'application/json'}
+		downloadLink = document.createElement "a"
+		downloadLink.href = window.webkitURL.createObjectURL blob
+		downloadLink.download = name + ".dd";
+		downloadLink.click()
+		return
+	
+	$("#save_md").click () ->
+		data = $("#editor").val()
+		name = $('input#docname').val()
+		if !name? or name == ""
+			name = "Untitled"
+		blob = new Blob [data], {type: 'application/json'}
+		downloadLink = document.createElement "a"
+		downloadLink.href = window.webkitURL.createObjectURL blob
+		downloadLink.download = name + ".md";
+		downloadLink.click()
+		return
 
 	converter = new Showdown.converter()
 	html = converter.makeHtml $("#editor").val()

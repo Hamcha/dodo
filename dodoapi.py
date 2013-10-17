@@ -8,46 +8,39 @@ import database
 import json
 
 class ViewDocument(webapp2.RequestHandler):
-
 	def get(self, user, durl, page=None):
 		from google.appengine._internal.django.utils.safestring import mark_safe
-
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
+			return self.error(404)
 
 		if not durl:
 			durl = user
 
 		doc = database.getDocument(dq, durl)
-
 		data = {}
 		data["docid"] = durl
 
 		if not doc:
-			self.error(404)
-			return
+			return self.error(404)
+
 		else:
 			# Retrieve page
 			if page is None or not page.strip():
 				page = "home"
 			else:
 				page = page.replace(".","")
-
 			pdata = database.getPage(doc,page)
 
 			if not pdata:
-				self.error(404)
-				return
+				return self.error(404)
 			else:
 				data["title"] = pdata.name
 				data["content"] = mark_safe(pdata.content)
 				data["pageurl"] = durl + "." + page
 
-		
 		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'application/json'
 		self.response.out.write (json.dumps(data))
@@ -63,12 +56,9 @@ class GetUser(webapp2.RequestHandler):
 			if dq:
 				data["name"] = dq.name
 			else:
-				self.error(403)
-				return
+				return self.error(403)
 		else:
-			self.error(403)
-			return
-		
+			return self.error(403)
 		
 		self.response.headers['Access-Control-Allow-Origin'] = '*'
 		self.response.headers ['Content-Type'] = 'application/json'
@@ -80,18 +70,15 @@ class DocList(webapp2.RequestHandler):
 
 		user = users.get_current_user()
 		if not user:
-			self.error(403)
-			return
-
+			return self.error(403)
+		
 		# Get user
 		dq = database.getUserDataByHandler(user.nickname())
 
-
 		# User not registered
 		if not dq:
-			self.error(403)
-			return
-
+			return self.error(403)
+		
 		# Get document (if it exists)
 		query = db.Query(model.Document)
 		query.ancestor(dq)

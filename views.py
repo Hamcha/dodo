@@ -17,20 +17,17 @@ class ViewDocument(webapp2.RequestHandler):
 
 		data = {}
 		data = enrich(data)
-
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
-
+			return self.error(404)
 		if not durl:
 			durl = user
 
+		user = users.get_current_user()
 		doc = database.getDocument(dq, durl)
 
-		user = users.get_current_user()
 		data["durl"] = durl
 		data["iscreator"] = False if not user else user.nickname() == dq.handler
 		if users.is_current_user_admin():
@@ -55,6 +52,9 @@ class ViewDocument(webapp2.RequestHandler):
 			pdata = database.getPage(doc,page)
 
 			if not pdata:
+				if not data["iscreator"]:
+					self.error(404)
+					return
 				# Inexistant Page?
 				data["iserror"] = True
 				data["title"] = mark_safe("This page doesn't exist <span style=\"color: #aaa;\">(yet?)</span>")
@@ -81,15 +81,13 @@ class EditDocument(webapp2.RequestHandler):
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
+			return self.error(404)
 
 		doc = database.getDocument(dq, durl)
 
 		user = users.get_current_user()
 		if not user:
-			self.error(403)
-			return
+			return self.error(403)
 		
 		data["iscreator"] = user.nickname() == dq.handler
 		if users.is_current_user_admin():
@@ -97,8 +95,7 @@ class EditDocument(webapp2.RequestHandler):
 
 		# Can't edit other people's document
 		if not data["iscreator"]:
-			self.error(404)
-			return
+			return self.error(404)
 
 		if doc == None:
 			# Inexistant Document?
@@ -136,15 +133,13 @@ class EditDocument(webapp2.RequestHandler):
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(405)
-			return
-
+			return self.error(405)
+			
 		user = users.get_current_user()
 
 		# Can't edit other people's document
 		if (user.nickname() != dq.handler) and (users.is_current_user_admin() == False):
-			self.error(405)
-			return
+			return self.error(405)
 
 		doc = database.getDocument(dq, durl)
 
@@ -185,8 +180,7 @@ class DeleteDocument(webapp2.RequestHandler):
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
+			return self.error(404)
 
 		user = users.get_current_user()
 		data["iscreator"] = user.nickname() == dq.handler
@@ -195,14 +189,12 @@ class DeleteDocument(webapp2.RequestHandler):
 
 		# Can't edit other people's document
 		if not data["iscreator"]:
-			self.error(403)
-			return
+			return self.error(403)
 
 		doc = database.getDocument(dq, durl)
 
 		if not doc:
-			self.error(404)
-			return
+			return self.error(404)
 		else:
 			# Retrieve page
 			if page is None or not page.strip():
@@ -213,8 +205,7 @@ class DeleteDocument(webapp2.RequestHandler):
 			data["name"] = doc.surl
 			pdata = database.getPage(doc,page)
 			if not pdata:
-				self.error(404)
-				return
+				return self.error(404)
 			else:
 				data["page"] = pdata.surl
 				data["pname"] = pdata.name if pdata.name != "" else "[Untitled Page]"
@@ -237,8 +228,7 @@ class DeleteDocument(webapp2.RequestHandler):
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(405)
-			return
+			return self.error(405)
 
 		user = users.get_current_user()
 
@@ -250,8 +240,7 @@ class DeleteDocument(webapp2.RequestHandler):
 		doc = database.getDocument(dq, durl)
 
 		if not doc:
-			self.error(405)
-			return
+			return self.error(405)
 		else:
 			if page == "home":
 				# Delete the document and every page associated with it
@@ -337,15 +326,18 @@ class LoginPage(webapp2.RequestHandler):
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
+		if config.homepage is None:
+			return self.redirect_to("login")
+
 		user = users.get_current_user()
 		if user:
 			# Get user
 			dq = database.getUserDataByHandler(user.nickname())
 
 			# User not registered
-			if dq or config.homepage is None:
-				self.redirect_to("login")
-				return
+			if dq:
+				return self.redirect_to("login")
+
 		from google.appengine._internal.django.utils.safestring import mark_safe
 
 		data = {}
@@ -377,9 +369,6 @@ class HomePage(webapp2.RequestHandler):
 		self.response.headers ['Content-Type'] = 'text/html'
 		self.response.out.write (template.render (path, data))
 
-
-
-
 class DocList(webapp2.RequestHandler):
 	def get(self, what):
 		data = {}
@@ -387,9 +376,8 @@ class DocList(webapp2.RequestHandler):
 
 		user = users.get_current_user()
 		if not user:
-			self.error(403)
-			return
-
+			return self.error(403)
+			
 		# Get user
 		dq = database.getUserDataByHandler(user.nickname())
 
@@ -397,8 +385,7 @@ class DocList(webapp2.RequestHandler):
 
 		# User not registered
 		if not dq:
-			self.error(403)
-			return
+			return self.error(403)
 
 		data["title"] = "List of all your documents"
 
@@ -431,19 +418,16 @@ class PageList(webapp2.RequestHandler):
 
 		# Can't see other people's indexes
 		if not u:
-			self.error(404)
-			return
+			return self.error(404)
 
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
+			return self.error(404)
 
 		if (u.nickname() != dq.handler) and (users.is_current_user_admin() == False):
-			self.error(404)
-			return
+			return self.error(404)
 
 		doc = database.getDocument(dq, durl)
 
@@ -488,8 +472,7 @@ class AdminCP(webapp2.RequestHandler):
 	def post(self):
 		# Check priviledges
 		if not users.is_current_user_admin():
-			self.error(405)
-			return
+			return self.error(405)
 
 		action = self.request.get('action')
 
@@ -514,19 +497,16 @@ class PinDocument(webapp2.RequestHandler):
 
 		# Can't pin other people's docs
 		if not u:
-			self.error(404)
-			return
+			return self.error(404)
 
 		dq = database.getUserData(user)
 
 		# User inexistant (Wrong url?)
 		if not dq:
-			self.error(404)
-			return
+			return self.error(404)
 
 		if (u.nickname() != dq.handler) and (users.is_current_user_admin() == False):
-			self.error(404)
-			return
+			return self.error(404)
 
 		doc = database.getDocument(dq, durl)
 		doc.isfav = (not doc.isfav) if doc.isfav != None else True

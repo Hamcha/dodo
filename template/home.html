@@ -2,8 +2,10 @@
 <html>
 <head>
 	<title>The Dodo{% if experimental %} [Experimental channel]{% endif %}</title>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/style.css" />
+	<!--[if lt IE 9]>
+    <script src="/json2.js"></script>
+	<![endif]-->
 	<script src="/jquery.min.js"></script>
 	<script src="/home.js"></script>
 	{% if not denied %}<script>user = "{{ name }}";</script>{% else %}
@@ -15,7 +17,7 @@
 	{% if denied %}
 		<img src="/symbol.svg" class="symbol" />
 		<table style="border: 0; width: 100%; height: 100%;"><tr><td style="vertical-align: middle;">
-		<container style="width: 400px; text-align: center; font-size: .9em;">
+		<div id="container" style="width: 400px; text-align: center; font-size: .9em;">
 		<header><!--<h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1>-->
 			<img src="/logo.svg" class="logo" />{% if experimental %}<div style="position: absolute;left: 50%;display: block;top: 10px; color: #F7225E; font-weight: 300; font-size: 1.25em;">[Experimental]</div>{% endif %}</header><br />
 		{% if islogged %}
@@ -26,13 +28,13 @@
 		Please <b>login</b> to use <b><i>Dodo</i></b><br /><br />
 		<a href="{{ url }}" class="button bgreen">Login</a>
 		{% endif %}
-		</container>
+		</div>
 	{% if experimental %}
 	<center style="width:450px; margin: 0 auto;"><i>This is the <red>[Experimental channel]</red>, anything on this version is to be considered unstable and still in development.</i></center>
 	{% endif %}
 		</tr></td></table>
 	{% else %}
-		<container>
+		<div id="container">
 		<header style="position:relative;"><!--<h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1>-->
 			<img src="/logo.svg" class="logo" />{% if experimental %}<div style="position: absolute;left: 50%;display: block;top: 0; color: #F7225E; font-weight: 300; font-size: 1.1em;">[Experimental]</div>{% endif %}</header><br />
 		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
@@ -66,7 +68,7 @@
 			<a class="{% if doc.isfav %}fav {% else %}normal {% endif %}item" href="{{ doc.url }}">{{ doc.name }}<id>{{ doc.surl }}</id>{% if doc.isfav %}<favspot>!</favspot>{% endif %}</a>
 			{% endfor %}
 		</div>
-		</center><br /></container>
+		</center><br /></div>
 		{% if experimental %}
 		<center style="width:900px; margin: 0 auto;"><i>This is the <red>[Experimental channel]</red>, anything on this version is to be considered unstable and still in development.</i></center>
 		{% endif %}

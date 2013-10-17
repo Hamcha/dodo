@@ -1,5 +1,5 @@
 application: md-docs
-version: "live"
+version: "experimental"
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -28,3 +28,7 @@ admin_console:
   pages:
   - name: Dodo AdminCP
     url: /acp
+
+skip_files:
+
+- ^node_modules

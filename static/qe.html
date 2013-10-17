@@ -2,25 +2,23 @@
 <html>
 <head>
 	<title>Quick Edit</title>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
 	<link href="/style.css" rel="stylesheet" type="text/css" />
 	<script src="/jquery.min.js"></script>
 	<script src="/qe.js"></script>
 	<style>
 		body { margin: 0; padding: 0; }
-		#title { 
-			position: absolute; top: 0; left: 0; right: 0; 
-			font-size: 1.7em; padding: 5px; font-family: 'Lato', sans-serif; font-weight: 300; 
-			text-align: center;
+		#twrap { position: absolute; top: 5px; left: 6px; right: 10px; padding: 0; margin: 0; }
+		#twrap input { 
+			height: 100%; width: 100%; margin: 0; text-align: center; padding: 3px 0;
+			font-size: 1.7em; font-family: 'Source Sans Pro', sans-serif; font-weight: 300; 
 		}
-		#editor { 
-			position: absolute; top: 50px; bottom: 40px; left: 0; right: 0; padding: 10px;
-		}
+		#ewrap { position: absolute; top: 55px; bottom: 60px; left: 6px; right: 18px; }
+		#ewrap textarea { height: 100%; width: 100%; margin: 0; padding: 5px; }
 	</style>
 </head>
 <body>
-	<input type="text" id="title" />
-	<textarea id="editor"></textarea>
+	<div id="twrap"><input type="text" id="title" /></div>
+	<div id="ewrap"><textarea id="editor"></textarea></div>
 	<div id="edbuttons" style="bottom: 0;">
 		<a id="save" class="button bgreen mini">Save</a> <a id="saveexit" class="button bblue mini">Save and Exit</a> <a id="discard" class="button bred mini">Discard changes</a>
 	</div>

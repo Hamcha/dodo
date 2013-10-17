@@ -15,6 +15,7 @@ qepopup = () ->
 	return
 
 receiveMessage = (e) ->
+	event = e unless event
 	return if event.origin != location.origin
 	switch e.data.substr(0,1)
 		when "c" then window.update e.data.substr 2
@@ -25,19 +26,17 @@ receiveMessage = (e) ->
 
 window.update = (data) ->
 	html = window.converter.makeHtml data
-	$("content").html html
+	$("#content").html html
 
 content = null
 $(document).ready () ->
 	$("#gohome").attr "href", location.origin
 	window.converter = new Showdown.converter()
-	content = $("#content").val()
+	content = $("#txcontent").val()
 	window.update content
 	
-	if window.chrome?
-		$("#quickedit").click qepopup
-	else
-		$("#quickedit").remove()
+	$("#quickedit").click qepopup
+
 	$("#pin").click () ->
 		$.post document.URL + "/pin", (data) ->
 			if data == "pinned"

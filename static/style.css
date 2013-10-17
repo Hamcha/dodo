@@ -1,54 +1,94 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic,400italic,700italic);
+/* line 3, style.scss */
 body {
   background-color: #eee;
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif; }
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
-container {
+/* line 9, style.scss */
+#container {
   display: block;
   position: relative;
-  margin: 10px auto;
-  padding: 10px;
-  width: 900px;
+  margin: 0 auto;
+  padding: 20px 5px;
+  max-width: 900px;
   background-color: #fff;
-  box-shadow: 0 0 10px #cccccc; }
+  margin-bottom: 10px;
+}
 
+/* line 15, style.scss */
+#wrapper {
+  padding: 0 30px 30px 30px;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  display: block;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #fff;
+  margin: 0 20px;
+}
+
+/* line 21, style.scss */
+#container.document {
+  padding: 20px 30px 30px 30px;
+}
+
+/* line 25, style.scss */
 header {
-  text-align: center; }
-  header h1 {
-    display: inline;
-    font-size: 2.5em;
-    font-weight: 900; }
-  header h2, header h3 {
-    display: inline;
-    font-size: 1.7em;
-    font-weight: 300; }
+  text-align: center;
+  min-height: 30px;
+}
+/* line 27, style.scss */
+header h1 {
+  display: inline;
+  font-size: 2.5em;
+  font-weight: 900;
+}
+/* line 28, style.scss */
+header h2, header h3 {
+  display: inline;
+  font-size: 1.7em;
+  font-weight: 400;
+}
 
+/* line 31, style.scss */
 h1 {
   font-size: 2.5em;
   font-weight: 900;
   padding: 0;
-  margin: 0; }
-
-h2 {
-  font-size: 1.7em;
-  font-weight: 400;
-  padding: 0;
   margin: 0;
-  margin-bottom: 5px; }
+}
 
+/* line 32, style.scss */
+h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  padding: 10px 0 2px 0;
+  margin: 0;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #bbb;
+}
+
+/* line 33, style.scss */
 h3 {
   font-size: 1.4em;
   font-weight: 300;
   padding: 0;
-  margin: 0;
-  margin-bottom: 5px; }
+  margin: 10px 0;
+}
 
+/* line 35, style.scss */
 h4 {
   display: inline;
   font-size: 1.4em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
+/* line 37, style.scss */
 a.button, a.button:visited {
   text-decoration: none;
   cursor: pointer;
@@ -58,93 +98,136 @@ a.button, a.button:visited {
   min-width: 60px;
   font-weight: 300;
   font-size: 1.2em;
-  border-radius: 2px; }
+  border-radius: 2px;
+}
 
+/* line 47, style.scss */
 a.bgreen {
   background-color: #0a2;
-  border: 1px solid #00aa22;
-  color: #fff; }
-  a.bgreen:hover {
-    background-color: #00dd2c; }
+  border: 1px solid #0a2;
+  color: #fff;
+}
+/* line 47, style.scss */
+a.bgreen:hover {
+  background-color: #00dd2c;
+}
 
+/* line 48, style.scss */
 a.byellow {
   background-color: #da0;
-  border: 1px solid #ddaa00;
-  color: #fff; }
-  a.byellow:hover {
-    background-color: #ffc811; }
+  border: 1px solid #da0;
+  color: #fff;
+}
+/* line 48, style.scss */
+a.byellow:hover {
+  background-color: #ffc811;
+}
 
+/* line 49, style.scss */
 a.bred {
   background-color: #d20;
-  border: 1px solid #dd2200;
-  color: #fff; }
-  a.bred:hover {
-    background-color: #ff3611; }
+  border: 1px solid #d20;
+  color: #fff;
+}
+/* line 49, style.scss */
+a.bred:hover {
+  background-color: #ff3611;
+}
 
+/* line 50, style.scss */
 a.bblue {
   background-color: #05c;
-  border: 1px solid #0055cc;
-  color: #fff; }
-  a.bblue:hover {
-    background-color: #006aff; }
+  border: 1px solid #05c;
+  color: #fff;
+}
+/* line 50, style.scss */
+a.bblue:hover {
+  background-color: #006aff;
+}
 
+/* line 51, style.scss */
 a.bpurple {
   background-color: #d0a;
-  border: 1px solid #dd00aa;
-  color: #fff; }
-  a.bpurple:hover {
-    background-color: #ff11c8; }
+  border: 1px solid #d0a;
+  color: #fff;
+}
+/* line 51, style.scss */
+a.bpurple:hover {
+  background-color: #ff11c8;
+}
 
+/* line 52, style.scss */
 a.bgrey, a.bgray {
   background-color: #eee;
-  border: 1px solid #cccccc;
-  color: #000; }
-  a.bgrey:hover, a.bgray:hover {
-    background-color: #c4c4c4; }
+  border: 1px solid #ccc;
+  color: #000;
+}
+/* line 52, style.scss */
+a.bgrey:hover, a.bgray:hover {
+  border-color: #999;
+}
 
+/* line 54, style.scss */
 div.box {
   display: inline-table;
   background-color: #fff;
-  padding: 5px; }
+  padding: 5px;
+}
 
+/* line 60, style.scss */
 input.newbox {
-  font-family: "Lato", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1.1em;
   font-weight: 300;
-  text-align: center; }
+  text-align: center;
+}
 
+/* line 66, style.scss */
 input.newbtn {
-  font-family: "Lato", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 1.1em;
   font-weight: 300;
-  text-align: center; }
+  text-align: center;
+}
 
+/* line 72, style.scss */
 span#newurl {
   font-size: 1.2em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
+/* line 76, style.scss */
 hr {
   height: 1px;
   border: 0;
-  background-color: #aaa; }
+  margin: 10px 0;
+  background-color: #bbb;
+}
 
+/* line 78, style.scss */
 a.fav {
   background-color: #ffffee;
-  border: 1px solid #ddaa22;
-  border-bottom: 2px solid #ddaa22;
-  color: #998500; }
-  a.fav:hover {
-    background-color: #ffe01a; }
+  border: 1px solid #da2;
+  color: #998500;
+}
+/* line 82, style.scss */
+a.fav:hover {
+  border-color: #b1881b;
+}
 
+/* line 85, style.scss */
 a.normal {
-  border: 1px solid #eeeeee;
+  border: 1px solid #eee;
   color: #000;
-  border-bottom: 2px solid #cccccc;
-  background: #eee; }
-  a.normal:hover {
-    background-color: #ccc;
-    border-bottom-color: #aaa; }
+  border: 1px solid #ccc;
+  background: #eee;
+}
+/* line 89, style.scss */
+a.normal:hover {
+  border: 1px solid #888;
+}
 
+/* line 92, style.scss */
 a.item, a.item:visited {
   position: relative;
   text-decoration: none;
@@ -156,110 +239,154 @@ a.item, a.item:visited {
   height: 45px;
   font-size: 1.3em;
   font-weight: 300;
-  margin: 2px 0;
+  margin: 2px;
   padding: 4px 70px 6px 10px;
   width: 200px;
   text-align: left;
-  border-radius: 2px; }
-  a.item id, a.item:visited id {
-    position: absolute;
-    left: 10px;
-    font-size: 0.7em;
-    bottom: 5px;
-    color: #999;
-    font-family: "Courier", monospace; }
-  a.item favspot, a.item:visited favspot {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    color: #da2;
-    font-size: 20px;
-    font-weight: 400; }
+  border-radius: 2px;
+}
+/* line 104, style.scss */
+a.item id, a.item:visited id {
+  position: absolute;
+  left: 10px;
+  font-size: 0.7em;
+  bottom: 5px;
+  color: #999;
+  font-family: "Courier", monospace;
+}
+/* line 106, style.scss */
+a.item favspot, a.item:visited favspot {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  color: #da2;
+  font-size: 20px;
+  font-weight: 400;
+}
 
+/* line 109, style.scss */
 div#editspot {
   position: absolute;
   text-align: right;
   top: 0;
   right: 0;
-  padding: 5px; }
-  div#editspot a, div#editspot a:visited {
-    border-radius: 2px;
-    background-color: #47d;
-    font-weight: 300;
-    color: #fff;
-    padding: 2px 5px;
-    cursor: pointer;
-    text-decoration: none;
-    opacity: 0.5; }
-    div#editspot a:hover, div#editspot a:visited:hover {
-      opacity: 1; }
-  div#editspot a.delete {
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #c03;
-    opacity: 0.5; }
-    div#editspot a.delete:hover {
-      opacity: 1; }
-  div#editspot a#quickedit {
-    background-color: #0aa;
-    opacity: 0.5; }
-    div#editspot a#quickedit:hover {
-      opacity: 1; }
+  padding: 10px;
+}
+/* line 112, style.scss */
+div#editspot a, div#editspot a:visited {
+  border-radius: 2px;
+  background-color: #47d;
+  font-weight: 300;
+  color: #fff;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0.5;
+}
+/* line 112, style.scss */
+div#editspot a:hover, div#editspot a:visited:hover {
+  opacity: 1;
+}
+/* line 113, style.scss */
+div#editspot a.delete {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #c03;
+  opacity: 0.5;
+}
+/* line 113, style.scss */
+div#editspot a.delete:hover {
+  opacity: 1;
+}
+/* line 114, style.scss */
+div#editspot a#quickedit {
+  background-color: #0aa;
+  opacity: 0.5;
+}
+/* line 114, style.scss */
+div#editspot a#quickedit:hover {
+  opacity: 1;
+}
 
+/* line 116, style.scss */
 div#homespot {
   position: absolute;
   text-align: right;
   top: 0;
   left: 0;
-  padding: 5px; }
-  div#homespot a#gohome {
-    background-color: #0a3;
-    padding: 2px 5px;
-    opacity: 0.5; }
-    div#homespot a#gohome:hover {
-      opacity: 1; }
-  div#homespot a, div#homespot a.visited {
-    border-radius: 2px;
-    font-weight: 300;
-    text-decoration: none;
-    color: #fff; }
-  div#homespot a.pin {
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #da2;
-    padding: 2px 5px;
-    color: #fff;
-    opacity: 0.5; }
-    div#homespot a.pin:hover {
-      opacity: 1; }
-  div#homespot a.pinned {
-    background-color: #a22;
-    opacity: 1; }
-    div#homespot a.pinned:hover {
-      opacity: 1; }
+  padding: 10px;
+}
+/* line 119, style.scss */
+div#homespot a#gohome {
+  background-color: #0a3;
+  padding: 4px 8px;
+  opacity: 0.5;
+}
+/* line 119, style.scss */
+div#homespot a#gohome:hover {
+  opacity: 1;
+}
+/* line 120, style.scss */
+div#homespot a, div#homespot a.visited {
+  border-radius: 2px;
+  font-weight: 300;
+  text-decoration: none;
+  color: #fff;
+}
+/* line 121, style.scss */
+div#homespot a.pin {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #da2;
+  padding: 4px 8px;
+  color: #fff;
+  opacity: 0.5;
+}
+/* line 121, style.scss */
+div#homespot a.pin:hover {
+  opacity: 1;
+}
+/* line 122, style.scss */
+div#homespot a.pinned {
+  background-color: #a22;
+  opacity: 1;
+}
+/* line 122, style.scss */
+div#homespot a.pinned:hover {
+  opacity: 1;
+}
 
+/* line 126, style.scss */
 ::selection {
   color: #fff;
   background-color: #333;
-  text-shadow: none; }
+  text-shadow: none;
+}
 
+/* line 127, style.scss */
 ::-moz-selection {
   color: #fff;
   background-color: #333;
-  text-shadow: none; }
+  text-shadow: none;
+}
 
+/* line 129, style.scss */
 .tbox {
   position: absolute;
   display: none;
   padding: 14px 17px;
-  z-index: 900; }
+  z-index: 900;
+}
 
+/* line 130, style.scss */
 .tinner {
   padding: 0px;
   background: white url(images/preload.gif) no-repeat 50% 50%;
-  border-right: 1px solid #333333;
-  border-bottom: 1px solid #333333; }
+  border-right: 1px solid #333;
+  border-bottom: 1px solid #333;
+}
 
+/* line 131, style.scss */
 .tmask {
   position: absolute;
   display: none;
@@ -268,8 +395,10 @@ div#homespot {
   height: 100%;
   width: 100%;
   background: #000;
-  z-index: 800; }
+  z-index: 800;
+}
 
+/* line 132, style.scss */
 .tclose {
   position: absolute;
   top: 0px;
@@ -277,27 +406,35 @@ div#homespot {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: url(images/close.png) no-repeat; }
+  background: url(images/close.png) no-repeat;
+}
 
+/* line 133, style.scss */
 .tclose:hover {
-  background-position: 0 -30px; }
+  background-position: 0 -30px;
+}
 
+/* line 135, style.scss */
 #edcontainer {
   position: absolute;
   left: 10px;
   right: 55%;
   top: 60px;
   bottom: 50px;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   padding: 10px;
   border-right: 0;
-  background-color: #fff; }
-  #edcontainer #editor {
-    border: 0;
-    width: 100%;
-    height: 100%;
-    outline: none; }
+  background-color: #fff;
+}
+/* line 140, style.scss */
+#edcontainer #editor {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
 
+/* line 143, style.scss */
 #previewbox {
   position: absolute;
   right: 10px;
@@ -308,101 +445,159 @@ div#homespot {
   background-color: #bbb;
   padding: 10px;
   border-right: 0;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
+/* line 148, style.scss */
 p {
-  margin-bottom: 10px; }
+  margin: 0;
+  margin-bottom: 1em;
+  font-weight: 400;
+  line-height: 1.4em;
+}
 
+/* line 150, style.scss */
 #result {
   position: absolute;
   background-color: #fff;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   bottom: 50px;
   right: 10px;
   left: 45%;
   top: 60px;
   padding: 10px;
-  overflow: auto; }
-  #result p {
-    margin-top: 0; }
+  overflow: auto;
+}
+/* line 155, style.scss */
+#result p {
+  margin-top: 0;
+}
 
-wrapper {
-  padding: 20px 30px 30px 30px;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  display: block;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  background-color: #fff;
-  margin: 0 20px;
-  box-shadow: 0 0 10px #cccccc; }
-
+/* line 158, style.scss */
 input.inh1 {
   width: 400px;
   text-align: center;
-  font-family: "Lato", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   font-size: 1.8em;
-  border: 1px solid #cccccc; }
+  border: 1px solid #ccc;
+}
 
+/* line 166, style.scss */
 #edbuttons {
   position: absolute;
   bottom: 5px;
   left: 0;
   right: 0;
-  text-align: center; }
-  #edbuttons .disabled {
-    background-color: #aaa;
-    color: #444;
-    border: 1px solid #aaaaaa; }
-    #edbuttons .disabled:hover {
-      background-color: #aaa; }
-  #edbuttons .mini {
-    height: 22px;
-    opacity: .5; }
-    #edbuttons .mini:hover {
-      opacity: 1; }
+  text-align: center;
+}
+/* line 169, style.scss */
+#edbuttons .disabled {
+  background-color: #aaa;
+  color: #444;
+  border: 1px solid #aaa;
+}
+/* line 169, style.scss */
+#edbuttons .disabled:hover {
+  background-color: #aaa;
+}
+/* line 170, style.scss */
+#edbuttons .mini {
+  height: 22px;
+  opacity: .5;
+}
+/* line 170, style.scss */
+#edbuttons .mini:hover {
+  opacity: 1;
+}
 
+/* line 172, style.scss */
 #edbuttons2 {
   position: absolute;
   top: 20px;
   right: 5px;
   text-align: center;
-  font-size: 0.8em; }
+  font-size: 0.8em;
+}
 
-#edbuttons3 {
+/* line 176, style.scss */
+#savebuttons {
   position: absolute;
-  top: 20px;
-  left: 5px;
-  text-align: center;
-  font-size: 0.8em; }
+  bottom: 5px;
+  left: 10px;
+  text-align: left;
+  z-index: 10;
+}
+/* line 179, style.scss */
+#savebuttons .disabled {
+  background-color: #aaa;
+  color: #444;
+  border: 1px solid #aaa;
+}
+/* line 179, style.scss */
+#savebuttons .disabled:hover {
+  background-color: #aaa;
+}
+/* line 180, style.scss */
+#savebuttons .mini {
+  font-size: 13px;
+  padding: 3px;
+  font-weight: 400;
+}
 
+/* line 183, style.scss */
 red {
-  color: #d05; }
+  color: #d05;
+}
 
+/* line 184, style.scss */
 yellow {
-  color: #da0; }
+  color: #da0;
+}
 
+/* line 185, style.scss */
 orange {
-  color: #e60; }
+  color: #e60;
+}
 
+/* line 186, style.scss */
 gray, grey {
-  color: #aaa; }
+  color: #888;
+}
 
+/* line 187, style.scss */
 green {
-  color: #0a3; }
+  color: #0a3;
+}
 
+/* line 188, style.scss */
 blue {
-  color: #05f; }
+  color: #05f;
+}
 
+/* line 189, style.scss */
 purple, magenta {
-  color: #d0f; }
+  color: #d0f;
+}
 
+/* line 190, style.scss */
 cyan {
-  color: #0cf; }
+  color: #0cf;
+}
 
+/* line 192, style.scss */
+quote {
+  display: block;
+  border: 1px solid #ccc;
+  border-left-width: 3px;
+  padding: 5px;
+  font-family: monospace;
+  font-size: 1.0em;
+  margin-left: 5px;
+  line-height: 1.5em;
+}
+
+/* line 198, style.scss */
 .error {
   position: absolute;
   bottom: 50px;
@@ -411,19 +606,25 @@ cyan {
   display: block;
   padding: 5px;
   background-color: rgba(255, 0, 0, 0.3);
-  color: #f00; }
+  color: #f00;
+}
 
+/* line 204, style.scss */
 img.logo {
-  width: 200px; }
+  width: 200px;
+}
 
+/* line 205, style.scss */
 img.symbol {
   z-index: -1;
   position: fixed;
   top: 20%;
   left: 20%;
   width: 50%;
-  opacity: 0.2; }
+  opacity: 0.2;
+}
 
+/* line 207, style.scss */
 div#drophide {
   position: absolute;
   top: 10px;
@@ -433,25 +634,52 @@ div#drophide {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 10;
   font-size: 3em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
+/* line 214, style.scss */
 ul.pageindex {
   margin: 0;
-  padding: 0 10px; }
-  ul.pageindex a {
-    color: #222;
-    text-decoration: none; }
-  ul.pageindex li {
-    list-style-type: none; }
-  ul.pageindex item {
-    border: 1px solid #cccccc;
-    border-left: 4px solid #cccccc;
-    display: inline-block;
-    margin: 3px 0;
-    padding: 5px 10px; }
-    ul.pageindex item:hover {
-      background-color: #ddd;
-      border-color: #aaa; }
+  padding: 0 10px;
+}
+/* line 216, style.scss */
+ul.pageindex a {
+  color: #222;
+  text-decoration: none;
+}
+/* line 217, style.scss */
+ul.pageindex li {
+  list-style-type: none;
+}
+/* line 218, style.scss */
+ul.pageindex item {
+  border: 1px solid #ccc;
+  border-left: 4px solid #ccc;
+  display: inline-block;
+  margin: 3px 0;
+  padding: 5px 10px;
+}
+/* line 221, style.scss */
+ul.pageindex item:hover {
+  background-color: #ddd;
+  border-color: #aaa;
+}
 
+/* line 225, style.scss */
 #editor {
-  resize: none; }
+  resize: none;
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait), screen and (max-width: 640px) {
+  /* line 230, style.scss */
+  header {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 0.8em;
+  }
+
+  /* line 231, style.scss */
+  #document {
+    padding: 10px;
+  }
+}

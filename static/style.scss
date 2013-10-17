@@ -1,25 +1,36 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic,400italic,700italic);
+
 body {
 	background-color: #eee;
 	margin: 0; padding: 0;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
-container {
+#container {
 	display: block; position: relative;
-	margin: 10px auto; padding: 10px; width: 900px;
-	background-color: #fff;
-	box-shadow: 0 0 10px #ccc;
+	margin: 0 auto; padding: 20px 5px; max-width: 900px;
+	background-color: #fff; margin-bottom: 10px;
+}
+
+#wrapper {
+	padding: 0 30px 30px 30px; position: absolute; top: 10px; bottom: 10px;
+	display: block; left: 0; right: 0; padding: 10px;
+	background-color: #fff; margin: 0 20px;
+}
+
+#container.document {
+	padding: 20px 30px 30px 30px;
 }
 
 header { 
-	text-align: center; 
+	text-align: center; min-height: 30px;
 	h1 { display: inline; font-size: 2.5em; font-weight: 900; }
-	h2, h3 { display: inline; font-size: 1.7em; font-weight: 300; }
+	h2, h3 { display: inline; font-size: 1.7em; font-weight: 400; }
 }
 
 h1 { font-size: 2.5em; font-weight: 900; padding: 0; margin: 0;}
-h2 { font-size: 1.7em; font-weight: 400; padding: 0; margin: 0; margin-bottom: 5px;}
-h3 { font-size: 1.4em; font-weight: 300; padding: 0; margin: 0; margin-bottom: 5px;}
+h2 { font-size: 1.5em; font-weight: 700; padding: 10px 0 2px 0; margin: 0; margin-bottom: 5px; border-bottom: 1px solid #bbb;}
+h3 { font-size: 1.4em; font-weight: 300; padding: 0; margin: 10px 0; }
 
 h4 { display: inline; font-size: 1.4em; font-weight: 300; }
 
@@ -38,7 +49,7 @@ a.byellow { background-color: #da0; border: 1px solid #da0; color: #fff; &:hover
 a.bred { background-color: #d20; border: 1px solid #d20; color: #fff; &:hover { background-color: lighten(#d20,10%); } }
 a.bblue { background-color: #05c; border: 1px solid #05c; color: #fff; &:hover { background-color: lighten(#05c,10%); }}
 a.bpurple { background-color: #d0a; border: 1px solid #d0a; color: #fff; &:hover { background-color: lighten(#d0a,10%); } }
-a.bgrey, a.bgray { background-color: #eee; border: 1px solid #ccc; color: #000; &:hover { background-color: darken(#ddd,10%); } }
+a.bgrey, a.bgray { background-color: #eee; border: 1px solid #ccc; color: #000; &:hover { border-color: #999; } }
 
 div.box {
 	display: inline-table;
@@ -47,13 +58,13 @@ div.box {
 }
 
 input.newbox {
-	font-family: "Lato", sans-serif;
+	font-family: "Source Sans Pro", sans-serif;
 	font-size: 1.1em; font-weight: 300;
 	text-align: center;
 }
 
 input.newbtn {
-	font-family: "Lato", sans-serif;
+	font-family: "Source Sans Pro", sans-serif;
 	font-size: 1.1em; font-weight: 300;
 	text-align: center;
 }
@@ -62,21 +73,20 @@ span#newurl {
 	font-size: 1.2em; font-weight: 300;
 }
 
-hr { height: 1px; border: 0; background-color: #aaa;}
+hr { height: 1px; border: 0; margin: 10px 0; background-color: #bbb;}
 
 a.fav {
 	background-color: #eee + #da0;
 	border: 1px solid #da2;
-	border-bottom: 2px solid #da2;
 	color: darken(#fd0,20%);
-	&:hover { background-color: lighten(#fd0,5%); }
+	&:hover { border-color: darken(#da2,10%); }
 }
 
 a.normal {
 	border: 1px solid #eee;
-	color: #000; border-bottom: 2px solid #ccc;
+	color: #000; border: 1px solid #ccc;
 	background: #eee;
-	&:hover { background-color: #ccc; border-bottom-color: #aaa;}
+	&:hover { border: 1px solid #888; }
 }
 
 a.item, a.item:visited {
@@ -88,7 +98,7 @@ a.item, a.item:visited {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	height: 45px; font-size: 1.3em; font-weight: 300;
-	margin: 2px 0; padding: 4px 70px 6px 10px;
+	margin: 2px; padding: 4px 70px 6px 10px;
 	width: 200px; text-align: left; border-radius: 2px;
 
 	id { position: absolute; left: 10px; font-size: 0.7em; bottom: 5px; color: #999; font-family: "Courier", monospace; }
@@ -98,17 +108,17 @@ a.item, a.item:visited {
 
 div#editspot {
 	position: absolute; text-align: right;
-	top: 0; right: 0; padding: 5px;
-	a, a:visited { border-radius: 2px; background-color: #47d; font-weight: 300; color: #fff; padding: 2px 5px; cursor:pointer; text-decoration: none; &:hover {opacity: 1; } opacity: 0.5; }
+	top: 0; right: 0; padding: 10px;
+	a, a:visited { border-radius: 2px; background-color: #47d; font-weight: 300; color: #fff; padding: 4px 8px; cursor:pointer; text-decoration: none; &:hover {opacity: 1; } opacity: 0.5; }
 	a.delete { cursor:pointer; text-decoration: none; background-color: #c03; &:hover { opacity: 1; } opacity: 0.5; }
 	a#quickedit { background-color: #0aa; &:hover { opacity: 1; } opacity: 0.5; }
 }
 div#homespot {
 	position: absolute; text-align: right;
-	top: 0; left: 0; padding: 5px;
-	a#gohome { background-color: #0a3; padding: 2px 5px; &:hover { opacity: 1; } opacity: 0.5; }
+	top: 0; left: 0; padding: 10px;
+	a#gohome { background-color: #0a3; padding: 4px 8px; &:hover { opacity: 1; } opacity: 0.5; }
 	a, a.visited { border-radius: 2px; font-weight: 300; text-decoration: none; color: #fff; }
-	a.pin { cursor:pointer; text-decoration: none; background-color: #da2; padding: 2px 5px; color: #fff; &:hover { opacity: 1; } opacity: 0.5; }
+	a.pin { cursor:pointer; text-decoration: none; background-color: #da2; padding: 4px 8px; color: #fff; &:hover { opacity: 1; } opacity: 0.5; }
 	a.pinned { background-color: #a22; &:hover { opacity: 1; } opacity: 1; }
 }
 
@@ -135,7 +145,7 @@ div#homespot {
 	background-color: #bbb; padding: 10px; border-right: 0; text-transform: uppercase;
 }
 
-p { margin-bottom: 10px; }
+p { margin: 0; margin-bottom: 1em; font-weight: 400; line-height: 1.4em; }
 
 #result {
 	position: absolute; background-color: #fff;
@@ -145,17 +155,10 @@ p { margin-bottom: 10px; }
 	p { margin-top: 0; }
 }
 
-wrapper {
-	padding: 20px 30px 30px 30px; position: absolute; top: 10px; bottom: 10px;
-	display: block; left: 0; right: 0; padding: 10px;
-	background-color: #fff; margin: 0 20px;
-	box-shadow: 0 0 10px #ccc;
-}
-
 input.inh1 {
 	width: 400px;
 	text-align: center;
-	font-family: "Lato", sans-serif;
+	font-family: "Source Sans Pro", sans-serif;
 	font-weight: 300;
 	font-size: 1.8em; border: 1px solid #ccc;
 }
@@ -170,19 +173,27 @@ input.inh1 {
 	position: absolute; top: 20px; right: 5px;
 	text-align: center; font-size: 0.8em;
 }
-#edbuttons3 {
-	position: absolute; top: 20px; left: 5px;
-	text-align: center; font-size: 0.8em;
+#savebuttons {
+	position: absolute; bottom: 5px; left: 10px;
+	text-align: left; z-index: 10;
+	.disabled { background-color: #aaa; color: #444; &:hover {background-color: #aaa;} border: 1px solid #aaa;}
+	.mini { font-size:13px; padding: 3px; font-weight: 400; }
 }
 
 red { color: #d05; }
 yellow { color: #da0; }
 orange { color: #e60; }
-gray, grey { color: #aaa; }
+gray, grey { color: #888; }
 green { color: #0a3; }
 blue { color: #05f; }
 purple, magenta { color: #d0f; }
 cyan { color: #0cf;}
+
+quote { 
+	display: block; border: 1px solid #ccc; border-left-width: 3px; 
+	padding: 5px; font-family: monospace; font-size: 1.0em; 
+	margin-left: 5px; line-height: 1.5em;
+}
 
 .error { 
 	position: absolute; bottom: 50px; right: 10px; left: 10px;
@@ -213,4 +224,9 @@ ul.pageindex {
 
 #editor { 
 	resize:none; 
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait), screen and (max-width: 640px) {
+	header { margin-top: 30px; margin-bottom: 20px; font-size: 0.8em; }
+	#document { padding: 10px; }
 }

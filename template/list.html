@@ -2,13 +2,12 @@
 <html>
 <head>
 	<title>The Dodo</title>
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900,300italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/style.css" />
 	<script src="/jquery.min.js"></script>
 	<script>user = "{{ name }}";</script>
 </head>
 <body>
-	<container>
+	<div id="container">
 	<header style="position:relative;"><!--<h1><span style="color: #999; font-weight: 300;">The</span> <i>Dodo</i></h1>-->
 			<img src="/logo.svg" class="logo" />{% if experimental %}<div style="position: absolute;left: 50%;display: block;top: 0; color: #F7225E; font-weight: 300; font-size: 1.1em;">[Experimental]</div>{% endif %}</header><br />
 		<div style="text-align:center; font-size: 1.3em; font-weight: 300;">Welcome back, <i>{{ name }}</i></div><br />
@@ -22,6 +21,6 @@
 		{% endfor %}
 	</div>
 	</div>
-	</center><br /></container>
+	</center><br /></div>
 </body>
 </html>
