@@ -1,7 +1,21 @@
-## Hamcha's stuff License ##
+This software is licensed using the [PPIE License](http://www.thedodo.it/hamcha/hlicense)
 
-You are permitted to do anything you want (use, edit, redistribuite, sell.. *everything*) with all the code that was written by me and published under this license, just don't patent anything and sue me.  
-Also, while I'd like to help you if you had any problems, this software doesn't come with any warranty and I'm not *required* to give you any support.
+    PPIE LICENSE  
+    Version 1.0.0, 2013-12-29  
+
+    Copyright (C) 2013 Alessandro Gatti.
+    All rights reserved. 
+
+    This software is provided 'as-is', without any express or implied
+    warranty. In no event will the authors be held liable for any damages
+    arising from the use of this software.  
+
+    Permission is granted to anyone to use this software for any purpose,
+    including commercial applications, and to alter it and redistribute it
+    freely, subject to the following restrictions:  
+
+    1. No part of software may be included in software projects that are 
+       solely distributed under strong copyleft restricted licenses.
 
 Note that this software package does come with stuff I haven't built myself and that it has own license, in fact:
 
